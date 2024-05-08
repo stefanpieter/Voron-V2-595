@@ -1,0 +1,513 @@
+-------------------- Log Start | Sun May  5 23:00:58 2024 --------------------
+platform: Linux-5.10.103-v7l+-armv7l-with-glibc2.31
+data_path: /home/pi/printer_data
+is_default_data_path: False
+config_file: /home/pi/klipper_config/moonraker.conf
+startup_warnings: []
+verbose: False
+debug: False
+asyncio_debug: False
+is_backup_config: False
+is_python_package: False
+instance_uuid: fcaf964132544f489c1d4b307e624771
+unix_socket_path: /home/pi/printer_data/comms/moonraker.sock
+software_version: v0.8.0-325-g99b97af
+git_branch: master
+git_remote: origin
+git_repo_url: https://github.com/Arksine/moonraker.git
+modified_files: []
+unofficial_components: []
+log_file: /home/pi/printer_data/logs/moonraker.log
+python_version: 3.9.2 (default, Mar 12 2021, 04:06:34)  [GCC 10.2.1 20210110]
+launch_args: /home/pi/moonraker-env/bin/python /home/pi/moonraker/moonraker/moonraker.py -d /home/pi/printer_data -c /home/pi/klipper_config/moonraker.conf
+msgspec_enabled: False
+uvloop_enabled: False
+
+#################### Moonraker Configuration ####################
+
+[server]
+host = 0.0.0.0
+port = 7125
+klippy_uds_address = /tmp/klippy_uds
+
+[file_manager]
+enable_object_processing = True
+
+[data_store]
+temperature_store_size = 600
+gcode_store_size = 1000
+
+[authorization]
+cors_domains = 
+	https://my.mainsail.xyz
+	http://my.mainsail.xyz
+	http://*.local
+	http://*.lan
+trusted_clients = 
+	10.0.0.0/8
+	127.0.0.0/8
+	169.254.0.0/16
+	172.16.0.0/12
+	192.168.0.0/16
+	FE80::/10
+	::1/128
+	127.0.0.1
+
+[update_manager]
+
+[history]
+
+[update_manager mainsail]
+type = web
+repo = mainsail-crew/mainsail
+path = ~/mainsail
+
+[update_manager KlipperScreen]
+type = git_repo
+path = ~/KlipperScreen
+origin = https://github.com/jordanruthe/KlipperScreen.git
+env = ~/.KlipperScreen-env/bin/python
+requirements = scripts/KlipperScreen-requirements.txt
+install_script = scripts/KlipperScreen-install.sh
+managed_services = KlipperScreen
+
+[update_manager crowsnest]
+type = git_repo
+path = ~/crowsnest
+origin = https://github.com/mainsail-crew/crowsnest.git
+install_script = tools/pkglist.sh
+
+[update_manager moonraker-obico]
+type = git_repo
+path = ~/moonraker-obico
+origin = https://github.com/TheSpaghettiDetective/moonraker-obico.git
+env = /home/pi/moonraker-obico-env/bin/python
+requirements = requirements.txt
+install_script = install.sh
+managed_services = 
+	moonraker-obico
+
+[update_manager nevermore]
+type = git_repo
+path = ~/nevermore-controller
+origin = https://github.com/sanaahamel/nevermore-controller.git
+primary_branch = main
+is_system_service = False
+
+[update_manager klipper-backup]
+type = git_repo
+path = ~/klipper-backup
+origin = https://github.com/Staubgeborener/klipper-backup.git
+managed_services = moonraker
+primary_branch = main
+
+#################################################################
+All Configuration Files:
+/home/pi/klipper_config/moonraker.conf
+/home/pi/klipper_config/moonraker-obico-update.cfg
+#################################################################
+
+Database Versions: pylmdb = 1.4.1, lmdb = (0, 9, 29)
+Unsafe Shutdown Count: 24
+
+System Info:
+
+***python***
+  version: (3, 9, 2, 'final', 0)
+  version_string: 3.9.2 (default, Mar 12 2021, 04:06:34)  [GCC 10.2.1 20210110]
+
+***cpu_info***
+  cpu_count: 4
+  bits: 32bit
+  processor: armv7l
+  cpu_desc: ARMv7 Processor rev 3 (v7l)
+  serial_number: 10000000f4998e7d
+  hardware_desc: BCM2711
+  model: Raspberry Pi 4 Model B Rev 1.1
+  total_memory: 1917108
+  memory_units: kB
+
+***sd_info***
+  manufacturer_id: 03
+  manufacturer: Sandisk
+  oem_id: 5344
+  product_name: SC16G
+  product_revision: 8.0
+  serial_number: e0368251
+  manufacturer_date: 6/2020
+  capacity: 14.8 GiB
+  total_bytes: 15931539456
+
+***distribution***
+  name: Raspbian GNU/Linux 11 (bullseye)
+  id: raspbian
+  version: 11
+  version_parts: {'major': '11', 'minor': '', 'build_number': ''}
+  like: debian
+  codename: bullseye
+  release_info: {'name': '0.', 'version_id': '2.0', 'id': 'mainsailos'}
+  kernel_version: 5.10.103-v7l+
+
+***virtualization***
+  virt_type: none
+  virt_identifier: none
+
+***network***
+
+***canbus***
+
+***Allowed Services***
+  klipper_mcu
+  webcamd
+  MoonCord
+  KlipperScreen
+  moonraker-telegram-bot
+  moonraker-obico
+  sonar
+  crowsnest
+  octoeverywhere
+  ratos-configurator
+Module libcamera unavailble, import failed
+
+Systemd unit moonraker.service:
+unit_name: moonraker.service
+is_default: True
+manager: systemd
+Properties:
+**Requires=['network-online.target', 'system.slice', 'sysinit.target', '-.mount']
+**After=['basic.target', 'network-online.target', 'systemd-journald.socket', 'system.slice', 'sysinit.target', '-.mount']
+**SupplementaryGroups=['moonraker-admin']
+**EnvironmentFiles=/home/pi/printer_data/systemd/moonraker.env
+**ExecStart=/home/pi/moonraker-env/bin/python $MOONRAKER_ARGS
+**WorkingDirectory=/home/pi/moonraker
+**FragmentPath=/etc/systemd/system/moonraker.service
+**Description=API Server for Klipper SV1
+**User=pi
+
+Systemd unit klipper.service:
+unit_name: klipper.service
+is_default: True
+manager: systemd
+Properties:
+**Requires=['system.slice', 'sysinit.target']
+**After=['basic.target', 'systemd-journald.socket', 'system.slice', 'sysinit.target']
+**SupplementaryGroups=[]
+**EnvironmentFiles=[]
+**ExecStart=/etc/init.d/klipper start
+**WorkingDirectory=
+**FragmentPath=/run/systemd/generator.late/klipper.service
+**Description=LSB: Klipper daemon
+**User=
+Git Repo moonraker: No warnings detected
+Git Repo klipper: Warnings detected:
+  Repo is corrupt
+  Repo has untracked source files: ['klippy/extras/nevermore.py']
+Git Repo KlipperScreen: No warnings detected
+Git Repo crowsnest: No warnings detected
+Git Repo moonraker-obico: Warnings detected:
+  Repo is corrupt
+Git Repo nevermore: No warnings detected
+Git Repo klipper-backup: Warnings detected:
+  Repo is corrupt
+Klipper Version: v0.12.0-65-g96ab9069-dirty
+2024-05-06 00:00:58,444 [application.py:log_request()] - 404 GET /machine/device_power/devices (127.0.0.1) [_API_KEY_USER_] 8.99ms
+2024-05-06 10:46:34,378 [job_state.py:_status_update()] - Job Started: Back panel_PLA_7h6m2.gcode
+2024-05-06 10:52:02,173 [file_manager.py:get_file_list()] - Updating File List <gcodes>...
+2024-05-06 10:52:32,840 [job_state.py:_status_update()] - Job Started: Back panel_PLA_7h6m2.gcode
+2024-05-06 11:02:34,392 [application.py:log_request()] - 404 GET /machine/device_power/devices (127.0.0.1) [_API_KEY_USER_] 5.13ms
+2024-05-06 12:14:56,587 [authorization.py:_check_trusted_connection()] - Trusted Connection Detected, IP: 192.168.1.140
+2024-05-06 12:14:56,590 [application.py:log_request()] - 101 GET /websocket (192.168.1.140) [_TRUSTED_USER_] 5.54ms
+2024-05-06 12:14:56,591 [websockets.py:open()] - Websocket Opened: ID: 2800655664, Proxied: True, User Agent: Mozilla/5.0 (iPhone; CPU iPhone OS 17_4_1 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.4.1 Mobile/15E148 Safari/604.1, Host Name: 192.168.1.207
+2024-05-06 12:14:56,612 [websockets.py:_handle_identify()] - Websocket 2800655664 Client Identified - Name: mainsail, Version: 2.10.0, Type: web
+2024-05-06 12:15:07,504 [websockets.py:on_close()] - Websocket Closed: ID: 2800655664 Close Code: None, Close Reason: None, Pong Time Elapsed: 0.90
+2024-05-06 12:37:07,972 [application.py:log_request()] - 101 GET /websocket (192.168.1.140) [_TRUSTED_USER_] 2.56ms
+2024-05-06 12:37:07,973 [websockets.py:open()] - Websocket Opened: ID: 2800641672, Proxied: True, User Agent: Mozilla/5.0 (iPhone; CPU iPhone OS 17_4_1 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.4.1 Mobile/15E148 Safari/604.1, Host Name: 192.168.1.207
+2024-05-06 12:37:08,115 [websockets.py:_handle_identify()] - Websocket 2800641672 Client Identified - Name: mainsail, Version: 2.10.0, Type: web
+2024-05-06 12:38:06,509 [websockets.py:on_close()] - Websocket Closed: ID: 2800641672 Close Code: None, Close Reason: None, Pong Time Elapsed: 8.52
+2024-05-06 12:39:24,250 [application.py:log_request()] - 101 GET /websocket (192.168.1.140) [_TRUSTED_USER_] 4.84ms
+2024-05-06 12:39:24,251 [websockets.py:open()] - Websocket Opened: ID: 2800643640, Proxied: True, User Agent: Mozilla/5.0 (iPhone; CPU iPhone OS 17_4_1 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.4.1 Mobile/15E148 Safari/604.1, Host Name: 192.168.1.207
+2024-05-06 12:39:24,273 [websockets.py:_handle_identify()] - Websocket 2800643640 Client Identified - Name: mainsail, Version: 2.10.0, Type: web
+2024-05-06 12:40:53,697 [websockets.py:on_close()] - Websocket Closed: ID: 2800643640 Close Code: None, Close Reason: None, Pong Time Elapsed: 9.43
+2024-05-06 12:48:30,172 [application.py:log_request()] - 101 GET /websocket (192.168.1.140) [_TRUSTED_USER_] 4.03ms
+2024-05-06 12:48:30,172 [websockets.py:open()] - Websocket Opened: ID: 2800641672, Proxied: True, User Agent: Mozilla/5.0 (iPhone; CPU iPhone OS 17_4_1 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.4.1 Mobile/15E148 Safari/604.1, Host Name: 192.168.1.207
+2024-05-06 12:48:30,189 [websockets.py:_handle_identify()] - Websocket 2800641672 Client Identified - Name: mainsail, Version: 2.10.0, Type: web
+2024-05-06 12:48:34,987 [websockets.py:on_close()] - Websocket Closed: ID: 2800641672 Close Code: None, Close Reason: None, Pong Time Elapsed: 4.82
+2024-05-06 13:50:16,302 [authorization.py:_check_trusted_connection()] - Trusted Connection Detected, IP: 192.168.1.138
+2024-05-06 13:50:16,304 [application.py:log_request()] - 101 GET /websocket (192.168.1.138) [_TRUSTED_USER_] 4.90ms
+2024-05-06 13:50:16,305 [websockets.py:open()] - Websocket Opened: ID: 2800640064, Proxied: True, User Agent: Mozilla/5.0 (iPhone; CPU iPhone OS 17_4_1 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.4.1 Mobile/15E148 Safari/604.1, Host Name: 192.168.1.207
+2024-05-06 13:50:16,345 [websockets.py:_handle_identify()] - Websocket 2800640064 Client Identified - Name: mainsail, Version: 2.10.0, Type: web
+2024-05-06 13:50:28,165 [application.py:log_request()] - 101 GET /websocket (192.168.1.140) [_TRUSTED_USER_] 2.72ms
+2024-05-06 13:50:28,166 [websockets.py:open()] - Websocket Opened: ID: 2800643760, Proxied: True, User Agent: Mozilla/5.0 (iPhone; CPU iPhone OS 17_4_1 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.4.1 Mobile/15E148 Safari/604.1, Host Name: 192.168.1.207
+2024-05-06 13:50:28,176 [websockets.py:_handle_identify()] - Websocket 2800643760 Client Identified - Name: mainsail, Version: 2.10.0, Type: web
+2024-05-06 13:50:46,723 [websockets.py:write_to_socket()] - Websocket closed while writing: 2800640064
+2024-05-06 13:50:51,308 [websockets.py:on_close()] - Websocket Closed: ID: 2800640064 Close Code: None, Close Reason: None, Pong Time Elapsed: 35.01
+2024-05-06 13:50:52,189 [websockets.py:on_close()] - Websocket Closed: ID: 2800643760 Close Code: None, Close Reason: None, Pong Time Elapsed: 3.99
+2024-05-06 14:01:09,531 [authorization.py:_check_trusted_connection()] - Trusted Connection Detected, IP: 192.168.1.95
+2024-05-06 14:01:09,533 [application.py:log_request()] - 101 GET /websocket (192.168.1.95) [_TRUSTED_USER_] 4.55ms
+2024-05-06 14:01:09,533 [websockets.py:open()] - Websocket Opened: ID: 2800640808, Proxied: True, User Agent: Mozilla/5.0 (iPhone; CPU iPhone OS 17_4_1 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.4.1 Mobile/15E148 Safari/604.1, Host Name: 192.168.1.207
+2024-05-06 14:01:09,582 [websockets.py:_handle_identify()] - Websocket 2800640808 Client Identified - Name: mainsail, Version: 2.10.0, Type: web
+2024-05-06 14:01:22,906 [websockets.py:on_close()] - Websocket Closed: ID: 2800640808 Close Code: None, Close Reason: None, Pong Time Elapsed: 3.26
+2024-05-06 14:52:23,419 [authorization.py:_prune_conn_handler()] - Trusted Connection Expired, IP: 192.168.1.140
+2024-05-06 14:52:23,420 [authorization.py:_prune_conn_handler()] - Trusted Connection Expired, IP: 192.168.1.138
+2024-05-06 15:02:23,421 [authorization.py:_prune_conn_handler()] - Trusted Connection Expired, IP: 192.168.1.95
+2024-05-06 15:02:30,690 [authorization.py:_check_trusted_connection()] - Trusted Connection Detected, IP: 192.168.1.95
+2024-05-06 15:02:30,692 [application.py:log_request()] - 101 GET /websocket (192.168.1.95) [_TRUSTED_USER_] 4.28ms
+2024-05-06 15:02:30,693 [websockets.py:open()] - Websocket Opened: ID: 2800641912, Proxied: True, User Agent: Mozilla/5.0 (iPhone; CPU iPhone OS 17_4_1 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.4.1 Mobile/15E148 Safari/604.1, Host Name: 192.168.1.207
+2024-05-06 15:02:30,742 [websockets.py:_handle_identify()] - Websocket 2800641912 Client Identified - Name: mainsail, Version: 2.10.0, Type: web
+2024-05-06 15:02:44,254 [websockets.py:on_close()] - Websocket Closed: ID: 2800641912 Close Code: None, Close Reason: None, Pong Time Elapsed: 3.45
+2024-05-06 15:11:47,958 [application.py:log_request()] - 101 GET /websocket (192.168.1.95) [_TRUSTED_USER_] 4.88ms
+2024-05-06 15:11:47,960 [websockets.py:open()] - Websocket Opened: ID: 2790022952, Proxied: True, User Agent: Mozilla/5.0 (iPhone; CPU iPhone OS 17_4_1 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.4.1 Mobile/15E148 Safari/604.1, Host Name: 192.168.1.207
+2024-05-06 15:11:47,982 [websockets.py:_handle_identify()] - Websocket 2790022952 Client Identified - Name: mainsail, Version: 2.10.0, Type: web
+2024-05-06 15:11:54,875 [websockets.py:on_close()] - Websocket Closed: ID: 2790022952 Close Code: None, Close Reason: None, Pong Time Elapsed: 6.92
+2024-05-06 15:13:38,049 [application.py:log_request()] - 101 GET /websocket (192.168.1.95) [_TRUSTED_USER_] 5.44ms
+2024-05-06 15:13:38,051 [websockets.py:open()] - Websocket Opened: ID: 2820157696, Proxied: True, User Agent: Mozilla/5.0 (iPhone; CPU iPhone OS 17_4_1 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.4.1 Mobile/15E148 Safari/604.1, Host Name: 192.168.1.207
+2024-05-06 15:13:38,070 [websockets.py:_handle_identify()] - Websocket 2820157696 Client Identified - Name: mainsail, Version: 2.10.0, Type: web
+2024-05-06 15:14:26,958 [websockets.py:on_close()] - Websocket Closed: ID: 2820157696 Close Code: None, Close Reason: None, Pong Time Elapsed: 8.86
+2024-05-06 15:18:00,894 [application.py:log_request()] - 101 GET /websocket (192.168.1.95) [_TRUSTED_USER_] 5.19ms
+2024-05-06 15:18:00,895 [websockets.py:open()] - Websocket Opened: ID: 2820291096, Proxied: True, User Agent: Mozilla/5.0 (iPhone; CPU iPhone OS 17_4_1 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.4.1 Mobile/15E148 Safari/604.1, Host Name: 192.168.1.207
+2024-05-06 15:18:01,702 [websockets.py:_handle_identify()] - Websocket 2820291096 Client Identified - Name: mainsail, Version: 2.10.0, Type: web
+2024-05-06 15:18:29,906 [websockets.py:on_close()] - Websocket Closed: ID: 2820291096 Close Code: None, Close Reason: None, Pong Time Elapsed: 9.00
+2024-05-06 15:20:57,552 [authorization.py:_check_trusted_connection()] - Trusted Connection Detected, IP: 192.168.1.140
+2024-05-06 15:20:57,555 [application.py:log_request()] - 101 GET /websocket (192.168.1.140) [_TRUSTED_USER_] 4.91ms
+2024-05-06 15:20:57,555 [websockets.py:open()] - Websocket Opened: ID: 2820159952, Proxied: True, User Agent: Mozilla/5.0 (iPhone; CPU iPhone OS 17_4_1 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.4.1 Mobile/15E148 Safari/604.1, Host Name: 192.168.1.207
+2024-05-06 15:20:57,567 [websockets.py:_handle_identify()] - Websocket 2820159952 Client Identified - Name: mainsail, Version: 2.10.0, Type: web
+2024-05-06 15:21:02,519 [websockets.py:on_close()] - Websocket Closed: ID: 2820159952 Close Code: None, Close Reason: None, Pong Time Elapsed: 4.97
+2024-05-06 16:20:02,048 [application.py:log_request()] - 101 GET /websocket (192.168.1.95) [_TRUSTED_USER_] 2.40ms
+2024-05-06 16:20:02,048 [websockets.py:open()] - Websocket Opened: ID: 2820275096, Proxied: True, User Agent: Mozilla/5.0 (iPhone; CPU iPhone OS 17_4_1 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.4.1 Mobile/15E148 Safari/604.1, Host Name: 192.168.1.207
+2024-05-06 16:20:02,128 [websockets.py:_handle_identify()] - Websocket 2820275096 Client Identified - Name: mainsail, Version: 2.10.0, Type: web
+2024-05-06 16:20:26,711 [websockets.py:on_close()] - Websocket Closed: ID: 2820275096 Close Code: None, Close Reason: None, Pong Time Elapsed: 4.59
+2024-05-06 16:22:23,437 [authorization.py:_prune_conn_handler()] - Trusted Connection Expired, IP: 192.168.1.140
+2024-05-06 16:36:59,185 [application.py:log_request()] - 101 GET /websocket (192.168.1.95) [_TRUSTED_USER_] 4.90ms
+2024-05-06 16:36:59,186 [websockets.py:open()] - Websocket Opened: ID: 2820292080, Proxied: True, User Agent: Mozilla/5.0 (iPhone; CPU iPhone OS 17_4_1 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.4.1 Mobile/15E148 Safari/604.1, Host Name: 192.168.1.207
+2024-05-06 16:36:59,198 [websockets.py:_handle_identify()] - Websocket 2820292080 Client Identified - Name: mainsail, Version: 2.10.0, Type: web
+2024-05-06 16:37:12,488 [websockets.py:on_close()] - Websocket Closed: ID: 2820292080 Close Code: None, Close Reason: None, Pong Time Elapsed: 3.28
+2024-05-06 16:39:43,456 [application.py:log_request()] - 101 GET /websocket (192.168.1.95) [_TRUSTED_USER_] 3.79ms
+2024-05-06 16:39:43,457 [websockets.py:open()] - Websocket Opened: ID: 2820288720, Proxied: True, User Agent: Mozilla/5.0 (iPhone; CPU iPhone OS 17_4_1 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.4.1 Mobile/15E148 Safari/604.1, Host Name: 192.168.1.207
+2024-05-06 16:39:43,465 [websockets.py:_handle_identify()] - Websocket 2820288720 Client Identified - Name: mainsail, Version: 2.10.0, Type: web
+2024-05-06 16:39:59,288 [websockets.py:on_close()] - Websocket Closed: ID: 2820288720 Close Code: None, Close Reason: None, Pong Time Elapsed: 5.81
+2024-05-06 16:49:54,508 [application.py:log_request()] - 101 GET /websocket (192.168.1.95) [_TRUSTED_USER_] 4.43ms
+2024-05-06 16:49:54,509 [websockets.py:open()] - Websocket Opened: ID: 2820275384, Proxied: True, User Agent: Mozilla/5.0 (iPhone; CPU iPhone OS 17_4_1 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.4.1 Mobile/15E148 Safari/604.1, Host Name: 192.168.1.207
+2024-05-06 16:49:54,646 [websockets.py:_handle_identify()] - Websocket 2820275384 Client Identified - Name: mainsail, Version: 2.10.0, Type: web
+2024-05-06 16:50:48,987 [websockets.py:on_close()] - Websocket Closed: ID: 2820275384 Close Code: None, Close Reason: None, Pong Time Elapsed: 4.31
+2024-05-06 16:55:30,346 [authorization.py:_check_trusted_connection()] - Trusted Connection Detected, IP: 192.168.1.140
+2024-05-06 16:55:30,349 [application.py:log_request()] - 101 GET /websocket (192.168.1.140) [_TRUSTED_USER_] 5.80ms
+2024-05-06 16:55:30,350 [websockets.py:open()] - Websocket Opened: ID: 2820290520, Proxied: True, User Agent: Mozilla/5.0 (iPhone; CPU iPhone OS 17_4_1 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.4.1 Mobile/15E148 Safari/604.1, Host Name: 192.168.1.207
+2024-05-06 16:55:30,367 [websockets.py:_handle_identify()] - Websocket 2820290520 Client Identified - Name: mainsail, Version: 2.10.0, Type: web
+2024-05-06 16:57:53,176 [websockets.py:on_close()] - Websocket Closed: ID: 2820290520 Close Code: None, Close Reason: None, Pong Time Elapsed: 2.73
+2024-05-06 16:58:01,349 [application.py:log_request()] - 101 GET /websocket (192.168.1.140) [_TRUSTED_USER_] 3.90ms
+2024-05-06 16:58:01,350 [websockets.py:open()] - Websocket Opened: ID: 2820291504, Proxied: True, User Agent: Mozilla/5.0 (iPhone; CPU iPhone OS 17_4_1 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.4.1 Mobile/15E148 Safari/604.1, Host Name: 192.168.1.207
+2024-05-06 16:58:01,362 [websockets.py:_handle_identify()] - Websocket 2820291504 Client Identified - Name: mainsail, Version: 2.10.0, Type: web
+2024-05-06 17:06:20,072 [websockets.py:on_close()] - Websocket Closed: ID: 2820291504 Close Code: None, Close Reason: None, Pong Time Elapsed: 8.47
+2024-05-06 17:06:27,111 [application.py:log_request()] - 101 GET /websocket (192.168.1.140) [_TRUSTED_USER_] 4.98ms
+2024-05-06 17:06:27,111 [websockets.py:open()] - Websocket Opened: ID: 2820273968, Proxied: True, User Agent: Mozilla/5.0 (iPhone; CPU iPhone OS 17_4_1 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.4.1 Mobile/15E148 Safari/604.1, Host Name: 192.168.1.207
+2024-05-06 17:06:27,125 [websockets.py:_handle_identify()] - Websocket 2820273968 Client Identified - Name: mainsail, Version: 2.10.0, Type: web
+2024-05-06 17:06:30,859 [websockets.py:on_close()] - Websocket Closed: ID: 2820273968 Close Code: None, Close Reason: None, Pong Time Elapsed: 3.75
+2024-05-06 17:08:36,681 [application.py:log_request()] - 101 GET /websocket (192.168.1.140) [_TRUSTED_USER_] 4.66ms
+2024-05-06 17:08:36,682 [websockets.py:open()] - Websocket Opened: ID: 2820291048, Proxied: True, User Agent: Mozilla/5.0 (iPhone; CPU iPhone OS 17_4_1 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.4.1 Mobile/15E148 Safari/604.1, Host Name: 192.168.1.207
+2024-05-06 17:08:36,695 [websockets.py:_handle_identify()] - Websocket 2820291048 Client Identified - Name: mainsail, Version: 2.10.0, Type: web
+2024-05-06 17:09:25,784 [websockets.py:on_close()] - Websocket Closed: ID: 2820291048 Close Code: None, Close Reason: None, Pong Time Elapsed: 9.09
+2024-05-06 17:10:20,147 [application.py:log_request()] - 101 GET /websocket (192.168.1.140) [_TRUSTED_USER_] 4.19ms
+2024-05-06 17:10:20,148 [websockets.py:open()] - Websocket Opened: ID: 2820158848, Proxied: True, User Agent: Mozilla/5.0 (iPhone; CPU iPhone OS 17_4_1 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.4.1 Mobile/15E148 Safari/604.1, Host Name: 192.168.1.207
+2024-05-06 17:10:20,158 [websockets.py:_handle_identify()] - Websocket 2820158848 Client Identified - Name: mainsail, Version: 2.10.0, Type: web
+2024-05-06 17:13:14,111 [websockets.py:on_close()] - Websocket Closed: ID: 2820158848 Close Code: None, Close Reason: None, Pong Time Elapsed: 3.95
+2024-05-06 17:15:21,102 [application.py:log_request()] - 101 GET /websocket (192.168.1.140) [_TRUSTED_USER_] 4.25ms
+2024-05-06 17:15:21,102 [websockets.py:open()] - Websocket Opened: ID: 2820159304, Proxied: True, User Agent: Mozilla/5.0 (iPhone; CPU iPhone OS 17_4_1 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.4.1 Mobile/15E148 Safari/604.1, Host Name: 192.168.1.207
+2024-05-06 17:15:21,115 [websockets.py:_handle_identify()] - Websocket 2820159304 Client Identified - Name: mainsail, Version: 2.10.0, Type: web
+2024-05-06 17:16:06,237 [websockets.py:on_close()] - Websocket Closed: ID: 2820159304 Close Code: None, Close Reason: None, Pong Time Elapsed: 5.12
+2024-05-06 17:40:43,669 [application.py:log_request()] - 101 GET /websocket (192.168.1.140) [_TRUSTED_USER_] 3.94ms
+2024-05-06 17:40:43,670 [websockets.py:open()] - Websocket Opened: ID: 2820159952, Proxied: True, User Agent: Mozilla/5.0 (iPhone; CPU iPhone OS 17_4_1 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.4.1 Mobile/15E148 Safari/604.1, Host Name: 192.168.1.207
+2024-05-06 17:40:43,683 [websockets.py:_handle_identify()] - Websocket 2820159952 Client Identified - Name: mainsail, Version: 2.10.0, Type: web
+2024-05-06 17:46:06,957 [websockets.py:on_close()] - Websocket Closed: ID: 2820159952 Close Code: None, Close Reason: None, Pong Time Elapsed: 3.28
+2024-05-06 17:47:00,169 [application.py:log_request()] - 101 GET /websocket (192.168.1.140) [_TRUSTED_USER_] 4.30ms
+2024-05-06 17:47:00,170 [websockets.py:open()] - Websocket Opened: ID: 2820275144, Proxied: True, User Agent: Mozilla/5.0 (iPhone; CPU iPhone OS 17_4_1 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.4.1 Mobile/15E148 Safari/604.1, Host Name: 192.168.1.207
+2024-05-06 17:47:00,182 [websockets.py:_handle_identify()] - Websocket 2820275144 Client Identified - Name: mainsail, Version: 2.10.0, Type: web
+2024-05-06 17:48:17,010 [websockets.py:on_close()] - Websocket Closed: ID: 2820275144 Close Code: None, Close Reason: None, Pong Time Elapsed: 6.82
+2024-05-06 17:52:23,455 [authorization.py:_prune_conn_handler()] - Trusted Connection Expired, IP: 192.168.1.95
+2024-05-06 18:47:23,468 [authorization.py:_prune_conn_handler()] - Trusted Connection Expired, IP: 192.168.1.140
+2024-05-06 19:15:40,060 [authorization.py:_check_trusted_connection()] - Trusted Connection Detected, IP: 192.168.1.95
+2024-05-06 19:15:40,062 [application.py:log_request()] - 101 GET /websocket (192.168.1.95) [_TRUSTED_USER_] 2.97ms
+2024-05-06 19:15:40,062 [websockets.py:open()] - Websocket Opened: ID: 2820290520, Proxied: True, User Agent: Mozilla/5.0 (iPhone; CPU iPhone OS 17_4_1 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.4.1 Mobile/15E148 Safari/604.1, Host Name: 192.168.1.207
+2024-05-06 19:15:40,139 [websockets.py:_handle_identify()] - Websocket 2820290520 Client Identified - Name: mainsail, Version: 2.10.0, Type: web
+2024-05-06 19:15:40,145 [websockets.py:on_close()] - Websocket Closed: ID: 2820290520 Close Code: 1001, Close Reason: None, Pong Time Elapsed: 0.09
+2024-05-06 19:15:40,146 [websockets.py:write_to_socket()] - Websocket closed while writing: 2820290520
+2024-05-06 19:15:40,357 [application.py:log_request()] - 101 GET /websocket (192.168.1.95) [_TRUSTED_USER_] 1.50ms
+2024-05-06 19:15:40,357 [websockets.py:open()] - Websocket Opened: ID: 2790020816, Proxied: True, User Agent: Mozilla/5.0 (iPhone; CPU iPhone OS 17_4_1 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.4.1 Mobile/15E148 Safari/604.1, Host Name: 192.168.1.207
+2024-05-06 19:15:40,400 [websockets.py:_handle_identify()] - Websocket 2790020816 Client Identified - Name: mainsail, Version: 2.10.0, Type: web
+2024-05-06 19:19:10,407 [websockets.py:on_close()] - Websocket Closed: ID: 2790020816 Close Code: None, Close Reason: None, Pong Time Elapsed: 10.03
+2024-05-06 19:23:56,174 [application.py:log_request()] - 101 GET /websocket (192.168.1.95) [_TRUSTED_USER_] 5.15ms
+2024-05-06 19:23:56,175 [websockets.py:open()] - Websocket Opened: ID: 2800656336, Proxied: True, User Agent: Mozilla/5.0 (iPhone; CPU iPhone OS 17_4_1 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.4.1 Mobile/15E148 Safari/604.1, Host Name: 192.168.1.207
+2024-05-06 19:23:56,263 [websockets.py:_handle_identify()] - Websocket 2800656336 Client Identified - Name: mainsail, Version: 2.10.0, Type: web
+2024-05-06 19:25:28,283 [websockets.py:on_close()] - Websocket Closed: ID: 2800656336 Close Code: None, Close Reason: None, Pong Time Elapsed: 2.08
+2024-05-06 19:56:54,635 [file_manager.py:get_file_list()] - Updating File List <gcodes>...
+2024-05-06 19:57:34,177 [klippy_connection.py:_process_status_update()] - Klippy has shutdown
+2024-05-06 19:57:34,187 [proc_stats.py:_handle_shutdown()] - 
+Moonraker System Usage Statistics:
+System Time: 1715021824.909442, Usage: 1.81%, Memory: 36992 kB
+System Time: 1715021825.909535, Usage: 1.96%, Memory: 36992 kB
+System Time: 1715021826.911463, Usage: 1.89%, Memory: 36992 kB
+System Time: 1715021827.912886, Usage: 2.21%, Memory: 36992 kB
+System Time: 1715021828.913288, Usage: 2.01%, Memory: 36992 kB
+System Time: 1715021829.915915, Usage: 1.96%, Memory: 36992 kB
+System Time: 1715021830.916383, Usage: 2.08%, Memory: 36992 kB
+System Time: 1715021831.917766, Usage: 2.08%, Memory: 36992 kB
+System Time: 1715021832.919114, Usage: 4.9%, Memory: 36992 kB
+System Time: 1715021833.919306, Usage: 2.0%, Memory: 36992 kB
+System Time: 1715021834.921420, Usage: 2.03%, Memory: 36992 kB
+System Time: 1715021835.921264, Usage: 2.03%, Memory: 36992 kB
+System Time: 1715021836.921372, Usage: 2.22%, Memory: 36992 kB
+System Time: 1715021837.923364, Usage: 2.03%, Memory: 36992 kB
+System Time: 1715021838.925579, Usage: 2.94%, Memory: 36992 kB
+System Time: 1715021839.926515, Usage: 1.97%, Memory: 36992 kB
+System Time: 1715021840.928399, Usage: 2.47%, Memory: 36992 kB
+System Time: 1715021841.928878, Usage: 2.01%, Memory: 36992 kB
+System Time: 1715021842.932444, Usage: 4.58%, Memory: 36992 kB
+System Time: 1715021843.932419, Usage: 2.19%, Memory: 36992 kB
+System Time: 1715021844.934500, Usage: 2.08%, Memory: 36992 kB
+System Time: 1715021845.934445, Usage: 1.99%, Memory: 36992 kB
+System Time: 1715021846.936032, Usage: 1.98%, Memory: 36992 kB
+System Time: 1715021847.937066, Usage: 2.24%, Memory: 36992 kB
+System Time: 1715021848.939470, Usage: 2.08%, Memory: 36992 kB
+System Time: 1715021849.940282, Usage: 2.03%, Memory: 36992 kB
+System Time: 1715021850.940387, Usage: 2.09%, Memory: 36992 kB
+System Time: 1715021851.943697, Usage: 1.95%, Memory: 36992 kB
+System Time: 1715021852.944201, Usage: 4.95%, Memory: 36992 kB
+System Time: 1715021853.948782, Usage: 2.17%, Memory: 36992 kB
+CPU Temperature: 41.381
+2024-05-06 19:57:34,192 [proc_stats.py:_handle_shutdown()] - Throttled Flags: 
+2024-05-06 19:57:47,534 [klippy_connection.py:_on_connection_closed()] - Klippy Connection Removed
+2024-05-06 19:57:48,795 [klippy_connection.py:_do_connect()] - Klippy Connection Established
+2024-05-06 19:57:51,064 [authorization.py:_check_trusted_connection()] - Trusted Connection Detected, IP: 127.0.0.1
+2024-05-06 19:58:05,782 [klippy_connection.py:_request_initial_subscriptions()] - Webhooks Subscribed
+2024-05-06 19:58:05,787 [klippy_connection.py:_request_initial_subscriptions()] - GCode Output Subscribed
+2024-05-06 19:58:05,793 [klippy_connection.py:_check_ready()] - 
+nevermore failed to connect - timed out
+
+Once the underlying issue is corrected, use the "RESTART"
+command to reload the config and restart the host software.
+Printer is halted
+
+2024-05-06 19:58:09,029 [klippy_connection.py:_on_connection_closed()] - Klippy Connection Removed
+2024-05-06 19:58:10,293 [klippy_connection.py:_do_connect()] - Klippy Connection Established
+2024-05-06 19:58:24,810 [authorization.py:_check_trusted_connection()] - Trusted Connection Detected, IP: 192.168.1.212
+2024-05-06 19:58:24,813 [application.py:log_request()] - 101 GET /websocket (192.168.1.212) [_TRUSTED_USER_] 5.55ms
+2024-05-06 19:58:24,814 [websockets.py:open()] - Websocket Opened: ID: 2800645600, Proxied: True, User Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36, Host Name: 192.168.1.207
+2024-05-06 19:58:24,823 [websockets.py:_handle_identify()] - Websocket 2800645600 Client Identified - Name: mainsail, Version: 2.10.0, Type: web
+2024-05-06 19:58:27,522 [klippy_connection.py:_request_initial_subscriptions()] - Webhooks Subscribed
+2024-05-06 19:58:27,539 [klippy_connection.py:_request_initial_subscriptions()] - GCode Output Subscribed
+2024-05-06 19:58:27,542 [klippy_connection.py:_check_ready()] - 
+nevermore failed to connect - timed out
+
+Once the underlying issue is corrected, use the "RESTART"
+command to reload the config and restart the host software.
+Printer is halted
+
+2024-05-06 19:58:33,172 [klippy_connection.py:_on_connection_closed()] - Klippy Connection Removed
+2024-05-06 19:58:34,439 [klippy_connection.py:_do_connect()] - Klippy Connection Established
+2024-05-06 19:58:51,755 [klippy_connection.py:_request_initial_subscriptions()] - Webhooks Subscribed
+2024-05-06 19:58:51,758 [klippy_connection.py:_request_initial_subscriptions()] - GCode Output Subscribed
+2024-05-06 19:58:51,761 [klippy_connection.py:_check_ready()] - 
+nevermore failed to connect - timed out
+
+Once the underlying issue is corrected, use the "RESTART"
+command to reload the config and restart the host software.
+Printer is halted
+
+2024-05-06 19:58:52,347 [websockets.py:on_close()] - Websocket Closed: ID: 2800645600 Close Code: 1001, Close Reason: None, Pong Time Elapsed: 7.52
+2024-05-06 19:58:52,495 [application.py:log_request()] - 101 GET /websocket (192.168.1.212) [_TRUSTED_USER_] 4.90ms
+2024-05-06 19:58:52,496 [websockets.py:open()] - Websocket Opened: ID: 2820792672, Proxied: True, User Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36, Host Name: 192.168.1.207
+2024-05-06 19:58:52,505 [websockets.py:_handle_identify()] - Websocket 2820792672 Client Identified - Name: mainsail, Version: 2.10.0, Type: web
+2024-05-06 19:59:18,245 [application.py:prepare()] - Upload Request Received from 192.168.1.212
+Content-Type: multipart/form-data; boundary=----WebKitFormBoundaryOsetZ7neBthe932T
+2024-05-06 19:59:18,270 [application.py:post()] - Processing Uploaded File: printer.cfg
+2024-05-06 19:59:18,283 [application.py:log_request()] - 201 POST /server/files/upload (192.168.1.212) [_TRUSTED_USER_] 40.71ms
+2024-05-06 19:59:18,366 [klippy_connection.py:_on_connection_closed()] - Klippy Connection Removed
+2024-05-06 19:59:19,628 [klippy_connection.py:_do_connect()] - Klippy Connection Established
+2024-05-06 19:59:22,454 [file_manager.py:get_file_list()] - Updating File List <gcodes>...
+2024-05-06 19:59:22,665 [klippy_connection.py:_request_initial_subscriptions()] - Webhooks Subscribed
+2024-05-06 19:59:22,685 [klippy_connection.py:_request_initial_subscriptions()] - GCode Output Subscribed
+2024-05-06 19:59:23,112 [job_state.py:_handle_started()] - Job state initialized: standby
+2024-05-06 19:59:23,360 [klippy_connection.py:_check_ready()] - Klippy ready
+2024-05-06 19:59:23,877 [data_store.py:_init_sensors()] - Configuring available sensors: ['temperature_sensor raspberry_pi', 'temperature_sensor SB', 'temperature_sensor chamber', 'heater_bed', 'extruder']
+2024-05-06 19:59:28,147 [file_manager.py:get_file_list()] - Updating File List <gcodes>...
+2024-05-06 20:02:05,309 [job_state.py:_status_update()] - Job Started: Back panel_PLA_7h6m2.gcode
+2024-05-06 20:03:27,248 [klippy_connection.py:wait()] - Request 'gcode/script' pending: 60.00 seconds
+2024-05-06 20:03:31,070 [klippy_connection.py:wait()] - Request 'gcode/script' pending: 60.00 seconds
+2024-05-06 20:03:34,500 [klippy_connection.py:wait()] - Request 'gcode/script' pending: 60.00 seconds
+2024-05-06 20:03:59,760 [application.py:log_request()] - 101 GET /websocket (192.168.1.95) [_TRUSTED_USER_] 4.33ms
+2024-05-06 20:03:59,761 [websockets.py:open()] - Websocket Opened: ID: 2800641480, Proxied: True, User Agent: Mozilla/5.0 (iPhone; CPU iPhone OS 17_4_1 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.4.1 Mobile/15E148 Safari/604.1, Host Name: 192.168.1.207
+2024-05-06 20:03:59,777 [websockets.py:_handle_identify()] - Websocket 2800641480 Client Identified - Name: mainsail, Version: 2.10.0, Type: web
+2024-05-06 20:04:27,250 [klippy_connection.py:wait()] - Request 'gcode/script' pending: 120.00 seconds
+2024-05-06 20:04:31,071 [klippy_connection.py:wait()] - Request 'gcode/script' pending: 120.00 seconds
+2024-05-06 20:04:34,502 [klippy_connection.py:wait()] - Request 'gcode/script' pending: 120.00 seconds
+2024-05-06 20:04:54,168 [authorization.py:_check_trusted_connection()] - Trusted Connection Detected, IP: 192.168.1.140
+2024-05-06 20:04:54,171 [application.py:log_request()] - 101 GET /websocket (192.168.1.140) [_TRUSTED_USER_] 6.34ms
+2024-05-06 20:04:54,172 [websockets.py:open()] - Websocket Opened: ID: 2779679184, Proxied: True, User Agent: Mozilla/5.0 (iPhone; CPU iPhone OS 17_4_1 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.4.1 Mobile/15E148 Safari/604.1, Host Name: 192.168.1.207
+2024-05-06 20:04:54,214 [websockets.py:_handle_identify()] - Websocket 2779679184 Client Identified - Name: mainsail, Version: 2.10.0, Type: web
+2024-05-06 20:05:06,699 [websockets.py:on_close()] - Websocket Closed: ID: 2779679184 Close Code: None, Close Reason: None, Pong Time Elapsed: 2.36
+2024-05-06 20:05:26,536 [klippy_connection.py:wait()] - Request 'gcode/script' pending: 60.00 seconds
+2024-05-06 20:05:27,252 [klippy_connection.py:wait()] - Request 'gcode/script' pending: 180.00 seconds
+2024-05-06 20:05:29,869 [websockets.py:write_to_socket()] - Websocket closed while writing: 2800641480
+2024-05-06 20:05:31,074 [klippy_connection.py:wait()] - Request 'gcode/script' pending: 180.00 seconds
+2024-05-06 20:05:34,504 [klippy_connection.py:wait()] - Request 'gcode/script' pending: 180.01 seconds
+2024-05-06 20:05:34,766 [websockets.py:on_close()] - Websocket Closed: ID: 2800641480 Close Code: None, Close Reason: None, Pong Time Elapsed: 44.99
+2024-05-06 20:05:36,281 [klippy_connection.py:wait()] - Request 'gcode/script' pending: 60.00 seconds
+2024-05-06 20:05:36,959 [application.py:log_request()] - 101 GET /websocket (192.168.1.140) [_TRUSTED_USER_] 3.95ms
+2024-05-06 20:05:36,960 [websockets.py:open()] - Websocket Opened: ID: 2779680504, Proxied: True, User Agent: Mozilla/5.0 (iPhone; CPU iPhone OS 17_4_1 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.4.1 Mobile/15E148 Safari/604.1, Host Name: 192.168.1.207
+2024-05-06 20:05:36,983 [websockets.py:_handle_identify()] - Websocket 2779680504 Client Identified - Name: mainsail, Version: 2.10.0, Type: web
+2024-05-06 20:07:02,708 [websockets.py:on_close()] - Websocket Closed: ID: 2779680504 Close Code: None, Close Reason: None, Pong Time Elapsed: 5.74
+2024-05-06 20:07:43,593 [application.py:log_request()] - 101 GET /websocket (192.168.1.140) [_TRUSTED_USER_] 5.12ms
+2024-05-06 20:07:43,593 [websockets.py:open()] - Websocket Opened: ID: 2779677744, Proxied: True, User Agent: Mozilla/5.0 (iPhone; CPU iPhone OS 17_4_1 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.4.1 Mobile/15E148 Safari/604.1, Host Name: 192.168.1.207
+2024-05-06 20:07:43,606 [websockets.py:on_close()] - Websocket Closed: ID: 2779677744 Close Code: None, Close Reason: None, Pong Time Elapsed: 0.02
+2024-05-06 20:07:44,748 [application.py:log_request()] - 101 GET /websocket (192.168.1.140) [_TRUSTED_USER_] 3.35ms
+2024-05-06 20:07:44,749 [websockets.py:open()] - Websocket Opened: ID: 2779677528, Proxied: True, User Agent: Mozilla/5.0 (iPhone; CPU iPhone OS 17_4_1 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.4.1 Mobile/15E148 Safari/604.1, Host Name: 192.168.1.207
+2024-05-06 20:07:44,756 [websockets.py:_handle_identify()] - Websocket 2779677528 Client Identified - Name: mainsail, Version: 2.10.0, Type: web
+2024-05-06 20:08:16,049 [websockets.py:on_close()] - Websocket Closed: ID: 2779677528 Close Code: None, Close Reason: None, Pong Time Elapsed: 1.23
+2024-05-06 20:22:01,911 [application.py:log_request()] - 101 GET /websocket (192.168.1.140) [_TRUSTED_USER_] 5.67ms
+2024-05-06 20:22:01,912 [websockets.py:open()] - Websocket Opened: ID: 2779677240, Proxied: True, User Agent: Mozilla/5.0 (iPhone; CPU iPhone OS 17_4_1 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.4.1 Mobile/15E148 Safari/604.1, Host Name: 192.168.1.207
+2024-05-06 20:22:02,044 [websockets.py:_handle_identify()] - Websocket 2779677240 Client Identified - Name: mainsail, Version: 2.10.0, Type: web
+2024-05-06 20:22:22,543 [websockets.py:on_close()] - Websocket Closed: ID: 2779677240 Close Code: None, Close Reason: None, Pong Time Elapsed: 0.62
+2024-05-06 20:23:32,207 [application.py:log_request()] - 101 GET /websocket (192.168.1.140) [_TRUSTED_USER_] 4.51ms
+2024-05-06 20:23:32,208 [websockets.py:open()] - Websocket Opened: ID: 2779678248, Proxied: True, User Agent: Mozilla/5.0 (iPhone; CPU iPhone OS 17_4_1 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.4.1 Mobile/15E148 Safari/604.1, Host Name: 192.168.1.207
+2024-05-06 20:23:32,271 [websockets.py:_handle_identify()] - Websocket 2779678248 Client Identified - Name: mainsail, Version: 2.10.0, Type: web
+2024-05-06 20:24:14,393 [websockets.py:on_close()] - Websocket Closed: ID: 2779678248 Close Code: None, Close Reason: None, Pong Time Elapsed: 2.16
+2024-05-06 20:25:05,729 [application.py:log_request()] - 101 GET /websocket (192.168.1.140) [_TRUSTED_USER_] 4.61ms
+2024-05-06 20:25:05,730 [websockets.py:open()] - Websocket Opened: ID: 2779679976, Proxied: True, User Agent: Mozilla/5.0 (iPhone; CPU iPhone OS 17_4_1 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.4.1 Mobile/15E148 Safari/604.1, Host Name: 192.168.1.207
+2024-05-06 20:25:05,740 [websockets.py:_handle_identify()] - Websocket 2779679976 Client Identified - Name: mainsail, Version: 2.10.0, Type: web
+2024-05-06 20:25:41,001 [websockets.py:on_close()] - Websocket Closed: ID: 2779679976 Close Code: None, Close Reason: None, Pong Time Elapsed: 5.25
+2024-05-06 20:26:29,741 [application.py:log_request()] - 101 GET /websocket (192.168.1.140) [_TRUSTED_USER_] 3.97ms
+2024-05-06 20:26:29,742 [websockets.py:open()] - Websocket Opened: ID: 2779676856, Proxied: True, User Agent: Mozilla/5.0 (iPhone; CPU iPhone OS 17_4_1 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.4.1 Mobile/15E148 Safari/604.1, Host Name: 192.168.1.207
+2024-05-06 20:26:29,891 [websockets.py:_handle_identify()] - Websocket 2779676856 Client Identified - Name: mainsail, Version: 2.10.0, Type: web
+2024-05-06 20:26:50,401 [websockets.py:on_close()] - Websocket Closed: ID: 2779676856 Close Code: None, Close Reason: None, Pong Time Elapsed: 0.60
+2024-05-06 21:02:23,495 [authorization.py:_prune_conn_handler()] - Trusted Connection Expired, IP: 127.0.0.1
+2024-05-06 21:02:23,495 [authorization.py:_prune_conn_handler()] - Trusted Connection Expired, IP: 192.168.1.212
+2024-05-06 21:07:23,496 [authorization.py:_prune_conn_handler()] - Trusted Connection Expired, IP: 192.168.1.95
+2024-05-06 21:13:54,297 [application.py:log_request()] - 101 GET /websocket (192.168.1.140) [_TRUSTED_USER_] 4.31ms
+2024-05-06 21:13:54,298 [websockets.py:open()] - Websocket Opened: ID: 2779677528, Proxied: True, User Agent: Mozilla/5.0 (iPhone; CPU iPhone OS 17_4_1 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.4.1 Mobile/15E148 Safari/604.1, Host Name: 192.168.1.207
+2024-05-06 21:13:54,358 [websockets.py:_handle_identify()] - Websocket 2779677528 Client Identified - Name: mainsail, Version: 2.10.0, Type: web
+2024-05-06 21:13:58,467 [websockets.py:on_close()] - Websocket Closed: ID: 2779677528 Close Code: None, Close Reason: None, Pong Time Elapsed: 4.17
+2024-05-06 21:18:34,899 [application.py:log_request()] - 101 GET /websocket (192.168.1.140) [_TRUSTED_USER_] 4.12ms
+2024-05-06 21:18:34,900 [websockets.py:open()] - Websocket Opened: ID: 2779678944, Proxied: True, User Agent: Mozilla/5.0 (iPhone; CPU iPhone OS 17_4_1 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.4.1 Mobile/15E148 Safari/604.1, Host Name: 192.168.1.207
+2024-05-06 21:18:34,915 [websockets.py:_handle_identify()] - Websocket 2779678944 Client Identified - Name: mainsail, Version: 2.10.0, Type: web
+2024-05-06 21:22:11,600 [websockets.py:on_close()] - Websocket Closed: ID: 2779678944 Close Code: None, Close Reason: None, Pong Time Elapsed: 6.69
+2024-05-06 22:12:53,567 [application.py:log_request()] - 101 GET /websocket (192.168.1.140) [_TRUSTED_USER_] 5.02ms
+2024-05-06 22:12:53,568 [websockets.py:open()] - Websocket Opened: ID: 2779676928, Proxied: True, User Agent: Mozilla/5.0 (iPhone; CPU iPhone OS 17_4_1 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.4.1 Mobile/15E148 Safari/604.1, Host Name: 192.168.1.207
+2024-05-06 22:12:53,611 [websockets.py:_handle_identify()] - Websocket 2779676928 Client Identified - Name: mainsail, Version: 2.10.0, Type: web
+2024-05-06 22:13:17,003 [websockets.py:on_close()] - Websocket Closed: ID: 2779676928 Close Code: None, Close Reason: None, Pong Time Elapsed: 3.43
+2024-05-06 22:15:37,675 [application.py:log_request()] - 101 GET /websocket (192.168.1.140) [_TRUSTED_USER_] 4.13ms
+2024-05-06 22:15:37,676 [websockets.py:open()] - Websocket Opened: ID: 2820291816, Proxied: True, User Agent: Mozilla/5.0 (iPhone; CPU iPhone OS 17_4_1 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.4.1 Mobile/15E148 Safari/604.1, Host Name: 192.168.1.207
+2024-05-06 22:15:37,687 [websockets.py:_handle_identify()] - Websocket 2820291816 Client Identified - Name: mainsail, Version: 2.10.0, Type: web
+2024-05-06 22:15:42,726 [websockets.py:on_close()] - Websocket Closed: ID: 2820291816 Close Code: None, Close Reason: None, Pong Time Elapsed: 5.05
+2024-05-06 22:26:42,133 [application.py:log_request()] - 101 GET /websocket (192.168.1.140) [_TRUSTED_USER_] 3.20ms
+2024-05-06 22:26:42,133 [websockets.py:open()] - Websocket Opened: ID: 2820272168, Proxied: True, User Agent: Mozilla/5.0 (iPhone; CPU iPhone OS 17_4_1 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.4.1 Mobile/15E148 Safari/604.1, Host Name: 192.168.1.207
+2024-05-06 22:26:42,147 [websockets.py:_handle_identify()] - Websocket 2820272168 Client Identified - Name: mainsail, Version: 2.10.0, Type: web
+2024-05-06 22:27:11,747 [websockets.py:on_close()] - Websocket Closed: ID: 2820272168 Close Code: None, Close Reason: None, Pong Time Elapsed: 9.47
+2024-05-06 22:31:25,634 [authorization.py:_check_trusted_connection()] - Trusted Connection Detected, IP: 192.168.1.95
+2024-05-06 22:31:25,638 [application.py:log_request()] - 101 GET /websocket (192.168.1.95) [_TRUSTED_USER_] 7.83ms
+2024-05-06 22:31:25,639 [websockets.py:open()] - Websocket Opened: ID: 2820290664, Proxied: True, User Agent: Mozilla/5.0 (iPhone; CPU iPhone OS 17_4_1 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.4.1 Mobile/15E148 Safari/604.1, Host Name: 192.168.1.207
+2024-05-06 22:31:25,651 [websockets.py:_handle_identify()] - Websocket 2820290664 Client Identified - Name: mainsail, Version: 2.10.0, Type: web
+2024-05-06 22:33:09,403 [websockets.py:on_close()] - Websocket Closed: ID: 2820290664 Close Code: None, Close Reason: None, Pong Time Elapsed: 3.43
+2024-05-06 23:12:05,023 [application.py:log_request()] - 101 GET /websocket (192.168.1.95) [_TRUSTED_USER_] 4.53ms
+2024-05-06 23:12:05,024 [websockets.py:open()] - Websocket Opened: ID: 2820292032, Proxied: True, User Agent: Mozilla/5.0 (iPhone; CPU iPhone OS 17_4_1 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.4.1 Mobile/15E148 Safari/604.1, Host Name: 192.168.1.207
+2024-05-06 23:12:05,162 [websockets.py:_handle_identify()] - Websocket 2820292032 Client Identified - Name: mainsail, Version: 2.10.0, Type: web
+2024-05-06 23:20:01,047 [websockets.py:on_close()] - Websocket Closed: ID: 2820292032 Close Code: None, Close Reason: None, Pong Time Elapsed: 5.92
+2024-05-06 23:27:23,528 [authorization.py:_prune_conn_handler()] - Trusted Connection Expired, IP: 192.168.1.140
