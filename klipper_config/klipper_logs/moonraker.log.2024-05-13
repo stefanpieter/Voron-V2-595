@@ -1,0 +1,300 @@
+-------------------- Log Start | Mon May 13 14:50:47 2024 --------------------
+platform: Linux-5.10.103-v7l+-armv7l-with-glibc2.31
+data_path: /home/pi/printer_data
+is_default_data_path: False
+config_file: /home/pi/klipper_config/moonraker.conf
+startup_warnings: []
+verbose: False
+debug: False
+asyncio_debug: False
+is_backup_config: False
+is_python_package: False
+instance_uuid: fcaf964132544f489c1d4b307e624771
+unix_socket_path: /home/pi/printer_data/comms/moonraker.sock
+software_version: v0.8.0-354-gba94285
+git_branch: master
+git_remote: origin
+git_repo_url: https://github.com/Arksine/moonraker.git
+modified_files: []
+unofficial_components: []
+log_file: /home/pi/printer_data/logs/moonraker.log
+python_version: 3.9.2 (default, Mar 12 2021, 04:06:34)  [GCC 10.2.1 20210110]
+launch_args: /home/pi/moonraker-env/bin/python /home/pi/moonraker/moonraker/moonraker.py -d /home/pi/printer_data -c /home/pi/klipper_config/moonraker.conf
+msgspec_enabled: False
+uvloop_enabled: False
+
+#################### Moonraker Configuration ####################
+
+[server]
+host = 0.0.0.0
+port = 7125
+klippy_uds_address = /tmp/klippy_uds
+
+[file_manager]
+enable_object_processing = True
+
+[data_store]
+temperature_store_size = 600
+gcode_store_size = 1000
+
+[authorization]
+cors_domains = 
+	https://my.mainsail.xyz
+	http://my.mainsail.xyz
+	http://*.local
+	http://*.lan
+trusted_clients = 
+	10.0.0.0/8
+	127.0.0.0/8
+	169.254.0.0/16
+	172.16.0.0/12
+	192.168.0.0/16
+	FE80::/10
+	::1/128
+	127.0.0.1
+
+[update_manager]
+
+[announcements]
+subscriptions = 
+	mainsail
+
+[history]
+
+[update_manager mainsail]
+type = web
+repo = mainsail-crew/mainsail
+path = ~/mainsail
+
+[update_manager KlipperScreen]
+type = git_repo
+path = ~/KlipperScreen
+origin = https://github.com/jordanruthe/KlipperScreen.git
+env = ~/.KlipperScreen-env/bin/python
+requirements = scripts/KlipperScreen-requirements.txt
+install_script = scripts/KlipperScreen-install.sh
+managed_services = KlipperScreen
+
+[update_manager crowsnest]
+type = git_repo
+path = ~/crowsnest
+origin = https://github.com/mainsail-crew/crowsnest.git
+install_script = tools/pkglist.sh
+
+[update_manager moonraker-obico]
+type = git_repo
+path = ~/moonraker-obico
+origin = https://github.com/TheSpaghettiDetective/moonraker-obico.git
+env = /home/pi/moonraker-obico-env/bin/python
+requirements = requirements.txt
+install_script = install.sh
+managed_services = 
+	moonraker-obico
+
+[update_manager nevermore]
+type = git_repo
+path = ~/nevermore-controller
+origin = https://github.com/sanaahamel/nevermore-controller.git
+primary_branch = main
+is_system_service = False
+
+[update_manager klipper-backup]
+type = git_repo
+path = ~/klipper-backup
+origin = https://github.com/Staubgeborener/klipper-backup.git
+managed_services = moonraker
+primary_branch = main
+
+[update_manager katapult]
+type = git_repo
+origin = git clone https://github.com/Arksine/katapult
+path = ~/katapult
+is_system_service = False
+
+#################################################################
+All Configuration Files:
+/home/pi/klipper_config/moonraker.conf
+/home/pi/klipper_config/moonraker-obico-update.cfg
+#################################################################
+
+Database Versions: pylmdb = 1.4.1, lmdb = (0, 9, 29)
+Unsafe Shutdown Count: 24
+
+System Info:
+
+***python***
+  version: (3, 9, 2, 'final', 0)
+  version_string: 3.9.2 (default, Mar 12 2021, 04:06:34)  [GCC 10.2.1 20210110]
+
+***cpu_info***
+  cpu_count: 4
+  bits: 32bit
+  processor: armv7l
+  cpu_desc: ARMv7 Processor rev 3 (v7l)
+  serial_number: 10000000f4998e7d
+  hardware_desc: BCM2711
+  model: Raspberry Pi 4 Model B Rev 1.1
+  total_memory: 1917108
+  memory_units: kB
+
+***sd_info***
+  manufacturer_id: 03
+  manufacturer: Sandisk
+  oem_id: 5344
+  product_name: SC16G
+  product_revision: 8.0
+  serial_number: e0368251
+  manufacturer_date: 6/2020
+  capacity: 14.8 GiB
+  total_bytes: 15931539456
+
+***distribution***
+  name: Raspbian GNU/Linux 11 (bullseye)
+  id: raspbian
+  version: 11
+  version_parts: {'major': '11', 'minor': '', 'build_number': ''}
+  like: debian
+  codename: bullseye
+  release_info: {'name': '0.', 'version_id': '2.0', 'id': 'mainsailos'}
+  kernel_version: 5.10.103-v7l+
+
+***virtualization***
+  virt_type: none
+  virt_identifier: none
+
+***network***
+
+***canbus***
+
+***Allowed Services***
+  klipper_mcu
+  webcamd
+  MoonCord
+  KlipperScreen
+  moonraker-telegram-bot
+  moonraker-obico
+  sonar
+  crowsnest
+  octoeverywhere
+  ratos-configurator
+Module libcamera unavailble, import failed
+
+Systemd unit moonraker.service:
+unit_name: moonraker.service
+is_default: True
+manager: systemd
+Properties:
+**Requires=['-.mount', 'sysinit.target', 'network-online.target', 'system.slice']
+**After=['basic.target', '-.mount', 'sysinit.target', 'network-online.target', 'systemd-journald.socket', 'system.slice']
+**SupplementaryGroups=['moonraker-admin']
+**EnvironmentFiles=/home/pi/printer_data/systemd/moonraker.env
+**ExecStart=/home/pi/moonraker-env/bin/python $MOONRAKER_ARGS
+**WorkingDirectory=/home/pi/moonraker
+**FragmentPath=/etc/systemd/system/moonraker.service
+**Description=API Server for Klipper SV1
+**User=pi
+
+Systemd unit klipper.service:
+unit_name: klipper.service
+is_default: True
+manager: systemd
+Properties:
+**Requires=['sysinit.target', 'system.slice']
+**After=['basic.target', 'system.slice', 'systemd-journald.socket', 'sysinit.target']
+**SupplementaryGroups=[]
+**EnvironmentFiles=[]
+**ExecStart=/etc/init.d/klipper start
+**WorkingDirectory=
+**FragmentPath=/run/systemd/generator.late/klipper.service
+**Description=LSB: Klipper daemon
+**User=
+Git Repo moonraker: No warnings detected
+Git Repo klipper: No warnings detected
+Git Repo KlipperScreen: No warnings detected
+Git Repo crowsnest: No warnings detected
+Git Repo moonraker-obico: No warnings detected
+Git Repo nevermore: No warnings detected
+Git Repo klipper-backup: No warnings detected
+Klipper Version: v0.12.0-179-g434770ea
+Git Repo katapult: Warnings detected:
+  Unofficial remote url: https://github.com/Arksine/katapult
+2024-05-13 15:50:47,349 [authorization.py:_check_trusted_connection()] - Trusted Connection Detected, IP: 192.168.1.212
+2024-05-13 15:50:47,352 [application.py:log_request()] - 101 GET /websocket (192.168.1.212) [_TRUSTED_USER_] 6.05ms
+2024-05-13 15:50:47,353 [websockets.py:open()] - Websocket Opened: ID: 2820061192, Proxied: True, User Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36, Host Name: 192.168.1.207
+2024-05-13 15:50:47,366 [websockets.py:_handle_identify()] - Websocket 2820061192 Client Identified - Name: mainsail, Version: 2.11.2, Type: web
+2024-05-13 15:50:47,419 [application.py:log_request()] - 404 GET /server/files/config/.theme/maintenance.json?time=1715611847381 (192.168.1.212) [_TRUSTED_USER_] 4.35ms
+2024-05-13 16:55:02,227 [authorization.py:_prune_conn_handler()] - Trusted Connection Expired, IP: 192.168.1.212
+2024-05-13 20:53:07,331 [websockets.py:on_close()] - Websocket Closed: ID: 2820061192 Close Code: None, Close Reason: None, Pong Time Elapsed: 9.97
+2024-05-13 20:53:08,794 [authorization.py:_check_trusted_connection()] - Trusted Connection Detected, IP: 192.168.1.212
+2024-05-13 20:53:08,798 [application.py:log_request()] - 101 GET /websocket (192.168.1.212) [_TRUSTED_USER_] 7.76ms
+2024-05-13 20:53:08,799 [websockets.py:open()] - Websocket Opened: ID: 2820060712, Proxied: True, User Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36, Host Name: 192.168.1.207
+2024-05-13 20:53:08,812 [websockets.py:_handle_identify()] - Websocket 2820060712 Client Identified - Name: mainsail, Version: 2.11.2, Type: web
+2024-05-13 20:53:08,924 [application.py:log_request()] - 404 GET /server/files/config/.theme/maintenance.json?time=1715629988874 (192.168.1.212) [_TRUSTED_USER_] 3.74ms
+2024-05-13 20:53:39,243 [websockets.py:write_to_socket()] - Websocket closed while writing: 2820060712
+2024-05-13 20:53:43,802 [websockets.py:on_close()] - Websocket Closed: ID: 2820060712 Close Code: None, Close Reason: None, Pong Time Elapsed: 35.01
+2024-05-13 20:53:46,904 [application.py:log_request()] - 101 GET /websocket (192.168.1.212) [_TRUSTED_USER_] 4.64ms
+2024-05-13 20:53:46,904 [websockets.py:open()] - Websocket Opened: ID: 2820060928, Proxied: True, User Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36, Host Name: 192.168.1.207
+2024-05-13 20:53:46,944 [websockets.py:_handle_identify()] - Websocket 2820060928 Client Identified - Name: mainsail, Version: 2.11.2, Type: web
+2024-05-13 20:53:47,041 [application.py:log_request()] - 404 GET /server/files/config/.theme/maintenance.json?time=1715630026970 (192.168.1.212) [_TRUSTED_USER_] 7.35ms
+2024-05-13 20:54:57,328 [websockets.py:write_to_socket()] - Websocket closed while writing: 2820060928
+2024-05-13 20:55:01,907 [websockets.py:on_close()] - Websocket Closed: ID: 2820060928 Close Code: None, Close Reason: None, Pong Time Elapsed: 44.99
+2024-05-13 21:10:59,053 [application.py:log_request()] - 101 GET /websocket (192.168.1.212) [_TRUSTED_USER_] 5.05ms
+2024-05-13 21:10:59,054 [websockets.py:open()] - Websocket Opened: ID: 2820346904, Proxied: True, User Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36, Host Name: 192.168.1.207
+2024-05-13 21:10:59,064 [websockets.py:_handle_identify()] - Websocket 2820346904 Client Identified - Name: mainsail, Version: 2.11.2, Type: web
+2024-05-13 21:10:59,139 [application.py:log_request()] - 404 GET /server/files/config/.theme/maintenance.json?time=1715631059053 (192.168.1.212) [_TRUSTED_USER_] 6.46ms
+2024-05-13 21:14:49,676 [websockets.py:write_to_socket()] - Websocket closed while writing: 2820346904
+2024-05-13 21:14:54,058 [websockets.py:on_close()] - Websocket Closed: ID: 2820346904 Close Code: None, Close Reason: None, Pong Time Elapsed: 44.99
+2024-05-13 21:30:28,051 [application.py:log_request()] - 101 GET /websocket (192.168.1.212) [_TRUSTED_USER_] 5.41ms
+2024-05-13 21:30:28,052 [websockets.py:open()] - Websocket Opened: ID: 2820062416, Proxied: True, User Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36, Host Name: 192.168.1.207
+2024-05-13 21:30:28,066 [websockets.py:_handle_identify()] - Websocket 2820062416 Client Identified - Name: mainsail, Version: 2.11.2, Type: web
+2024-05-13 21:30:28,126 [application.py:log_request()] - 404 GET /server/files/config/.theme/maintenance.json?time=1715632228082 (192.168.1.212) [_TRUSTED_USER_] 5.97ms
+2024-05-13 21:31:58,822 [websockets.py:write_to_socket()] - Websocket closed while writing: 2820062416
+2024-05-13 21:32:03,057 [websockets.py:on_close()] - Websocket Closed: ID: 2820062416 Close Code: None, Close Reason: None, Pong Time Elapsed: 45.00
+2024-05-13 21:46:04,541 [application.py:log_request()] - 101 GET /websocket (192.168.1.212) [_TRUSTED_USER_] 3.64ms
+2024-05-13 21:46:04,542 [websockets.py:open()] - Websocket Opened: ID: 2820347264, Proxied: True, User Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36, Host Name: 192.168.1.207
+2024-05-13 21:46:04,552 [websockets.py:_handle_identify()] - Websocket 2820347264 Client Identified - Name: mainsail, Version: 2.11.2, Type: web
+2024-05-13 21:46:04,602 [application.py:log_request()] - 404 GET /server/files/config/.theme/maintenance.json?time=1715633164564 (192.168.1.212) [_TRUSTED_USER_] 3.96ms
+2024-05-13 22:06:35,138 [websockets.py:write_to_socket()] - Websocket closed while writing: 2820347264
+2024-05-13 22:06:39,545 [websockets.py:on_close()] - Websocket Closed: ID: 2820347264 Close Code: None, Close Reason: None, Pong Time Elapsed: 44.99
+2024-05-13 22:23:22,718 [application.py:log_request()] - 101 GET /websocket (192.168.1.212) [_TRUSTED_USER_] 5.64ms
+2024-05-13 22:23:22,719 [websockets.py:open()] - Websocket Opened: ID: 2820347960, Proxied: True, User Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36, Host Name: 192.168.1.207
+2024-05-13 22:23:22,730 [websockets.py:_handle_identify()] - Websocket 2820347960 Client Identified - Name: mainsail, Version: 2.11.2, Type: web
+2024-05-13 22:23:22,787 [application.py:log_request()] - 404 GET /server/files/config/.theme/maintenance.json?time=1715635402747 (192.168.1.212) [_TRUSTED_USER_] 6.87ms
+2024-05-13 22:32:02,793 [websockets.py:write_to_socket()] - Websocket closed while writing: 2820347960
+2024-05-13 22:32:07,724 [websockets.py:on_close()] - Websocket Closed: ID: 2820347960 Close Code: None, Close Reason: None, Pong Time Elapsed: 44.99
+2024-05-13 22:48:16,587 [application.py:log_request()] - 101 GET /websocket (192.168.1.212) [_TRUSTED_USER_] 4.66ms
+2024-05-13 22:48:16,588 [websockets.py:open()] - Websocket Opened: ID: 2820347624, Proxied: True, User Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36, Host Name: 192.168.1.207
+2024-05-13 22:48:16,601 [websockets.py:_handle_identify()] - Websocket 2820347624 Client Identified - Name: mainsail, Version: 2.11.2, Type: web
+2024-05-13 22:48:16,657 [application.py:log_request()] - 404 GET /server/files/config/.theme/maintenance.json?time=1715636896626 (192.168.1.212) [_TRUSTED_USER_] 6.23ms
+2024-05-13 22:50:17,007 [websockets.py:write_to_socket()] - Websocket closed while writing: 2820347624
+2024-05-13 22:50:21,591 [websockets.py:on_close()] - Websocket Closed: ID: 2820347624 Close Code: None, Close Reason: None, Pong Time Elapsed: 44.95
+2024-05-13 22:54:52,244 [application.py:log_request()] - 101 GET /websocket (192.168.1.212) [_TRUSTED_USER_] 5.49ms
+2024-05-13 22:54:52,246 [websockets.py:open()] - Websocket Opened: ID: 2820346208, Proxied: True, User Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36, Host Name: 192.168.1.207
+2024-05-13 22:54:52,257 [websockets.py:_handle_identify()] - Websocket 2820346208 Client Identified - Name: mainsail, Version: 2.11.2, Type: web
+2024-05-13 22:54:52,319 [application.py:log_request()] - 404 GET /server/files/config/.theme/maintenance.json?time=1715637292277 (192.168.1.212) [_TRUSTED_USER_] 5.45ms
+2024-05-13 22:55:42,376 [websockets.py:write_to_socket()] - Websocket closed while writing: 2820346208
+2024-05-13 22:55:47,252 [websockets.py:on_close()] - Websocket Closed: ID: 2820346208 Close Code: None, Close Reason: None, Pong Time Elapsed: 44.99
+2024-05-13 23:11:43,904 [application.py:log_request()] - 101 GET /websocket (192.168.1.212) [_TRUSTED_USER_] 5.54ms
+2024-05-13 23:11:43,905 [websockets.py:open()] - Websocket Opened: ID: 2819964992, Proxied: True, User Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36, Host Name: 192.168.1.207
+2024-05-13 23:11:43,916 [websockets.py:_handle_identify()] - Websocket 2819964992 Client Identified - Name: mainsail, Version: 2.11.2, Type: web
+2024-05-13 23:11:43,962 [application.py:log_request()] - 404 GET /server/files/config/.theme/maintenance.json?time=1715638303937 (192.168.1.212) [_TRUSTED_USER_] 4.46ms
+2024-05-13 23:13:54,595 [websockets.py:write_to_socket()] - Websocket closed while writing: 2819964992
+2024-05-13 23:13:58,908 [websockets.py:on_close()] - Websocket Closed: ID: 2819964992 Close Code: None, Close Reason: None, Pong Time Elapsed: 44.98
+2024-05-13 23:29:52,594 [application.py:log_request()] - 101 GET /websocket (192.168.1.212) [_TRUSTED_USER_] 4.59ms
+2024-05-13 23:29:52,595 [websockets.py:open()] - Websocket Opened: ID: 2820347384, Proxied: True, User Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36, Host Name: 192.168.1.207
+2024-05-13 23:29:52,607 [websockets.py:_handle_identify()] - Websocket 2820347384 Client Identified - Name: mainsail, Version: 2.11.2, Type: web
+2024-05-13 23:29:52,789 [application.py:log_request()] - 404 GET /server/files/config/.theme/maintenance.json?time=1715639392750 (192.168.1.212) [_TRUSTED_USER_] 4.47ms
+2024-05-13 23:30:52,754 [websockets.py:write_to_socket()] - Websocket closed while writing: 2820347384
+2024-05-13 23:30:57,598 [websockets.py:on_close()] - Websocket Closed: ID: 2820347384 Close Code: None, Close Reason: None, Pong Time Elapsed: 44.99
+2024-05-13 23:46:57,471 [application.py:log_request()] - 101 GET /websocket (192.168.1.212) [_TRUSTED_USER_] 5.91ms
+2024-05-13 23:46:57,473 [websockets.py:open()] - Websocket Opened: ID: 2820061000, Proxied: True, User Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36, Host Name: 192.168.1.207
+2024-05-13 23:46:57,483 [websockets.py:_handle_identify()] - Websocket 2820061000 Client Identified - Name: mainsail, Version: 2.11.2, Type: web
+2024-05-13 23:46:57,533 [application.py:log_request()] - 404 GET /server/files/config/.theme/maintenance.json?time=1715640417500 (192.168.1.212) [_TRUSTED_USER_] 4.98ms
+2024-05-13 23:48:57,974 [websockets.py:write_to_socket()] - Websocket closed while writing: 2820061000
+2024-05-13 23:49:02,476 [websockets.py:on_close()] - Websocket Closed: ID: 2820061000 Close Code: None, Close Reason: None, Pong Time Elapsed: 44.97
+2024-05-13 23:55:42,496 [application.py:log_request()] - 101 GET /websocket (192.168.1.212) [_TRUSTED_USER_] 4.61ms
+2024-05-13 23:55:42,497 [websockets.py:open()] - Websocket Opened: ID: 2820062728, Proxied: True, User Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36, Host Name: 192.168.1.207
+2024-05-13 23:55:42,510 [websockets.py:_handle_identify()] - Websocket 2820062728 Client Identified - Name: mainsail, Version: 2.11.2, Type: web
+2024-05-13 23:55:42,557 [application.py:log_request()] - 404 GET /server/files/config/.theme/maintenance.json?time=1715640942527 (192.168.1.212) [_TRUSTED_USER_] 3.93ms
+2024-05-13 23:56:42,508 [websockets.py:write_to_socket()] - Websocket closed while writing: 2820062728
+2024-05-13 23:56:47,500 [websockets.py:on_close()] - Websocket Closed: ID: 2820062728 Close Code: None, Close Reason: None, Pong Time Elapsed: 44.99
