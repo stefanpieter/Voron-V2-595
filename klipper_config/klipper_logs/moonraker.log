@@ -1977,3 +1977,7 @@ Content-Type: multipart/form-data; boundary=----WebKitFormBoundaryeF6Bv7J6G54Kkf
 Content-Type: multipart/form-data; boundary=----WebKitFormBoundarysAeAhcxDYJuUv6fV
 2024-06-19 19:36:43,211 [application.py:post()] - Processing Uploaded File: printer.cfg
 2024-06-19 19:36:43,221 [application.py:log_request()] - 201 POST /server/files/upload (192.168.1.202) [_TRUSTED_USER_] 35.21ms
+2024-06-19 19:40:52,608 [application.py:prepare()] - Upload Request Received from 192.168.1.202
+Content-Type: multipart/form-data; boundary=----WebKitFormBoundaryZd3S0XsfwzjAQJLh
+2024-06-19 19:40:52,629 [application.py:post()] - Processing Uploaded File: printer.cfg
+2024-06-19 19:40:52,641 [application.py:log_request()] - 201 POST /server/files/upload (192.168.1.202) [_TRUSTED_USER_] 35.42ms
