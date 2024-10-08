@@ -1,0 +1,858 @@
+-------------------- Log Start | Sat Oct  5 23:38:43 2024 --------------------
+platform: Linux-5.10.103-v7l+-armv7l-with-glibc2.31
+data_path: /home/pi/printer_data
+is_default_data_path: False
+config_file: /home/pi/klipper_config/moonraker.conf
+backup_config: /home/pi/klipper_config/.moonraker.conf.bkp
+startup_warnings: []
+verbose: False
+debug: False
+asyncio_debug: False
+is_backup_config: False
+is_python_package: False
+instance_uuid: fcaf964132544f489c1d4b307e624771
+unix_socket_path: /home/pi/printer_data/comms/moonraker.sock
+software_version: v0.9.3-0-g71f9e67
+git_branch: master
+git_remote: origin
+git_repo_url: https://github.com/Arksine/moonraker.git
+modified_files: []
+unofficial_components: []
+log_file: /home/pi/printer_data/logs/moonraker.log
+python_version: 3.9.2 (default, Mar 12 2021, 04:06:34)  [GCC 10.2.1 20210110]
+launch_args: /home/pi/moonraker-env/bin/python /home/pi/moonraker/moonraker/moonraker.py -d /home/pi/printer_data -c /home/pi/klipper_config/moonraker.conf
+msgspec_enabled: False
+uvloop_enabled: False
+
+#################### Moonraker Configuration ####################
+
+[server]
+host = 0.0.0.0
+port = 7125
+klippy_uds_address = /tmp/klippy_uds
+
+[file_manager]
+enable_object_processing = True
+
+[data_store]
+temperature_store_size = 600
+gcode_store_size = 1000
+
+[authorization]
+cors_domains = 
+	https://my.mainsail.xyz
+	http://my.mainsail.xyz
+	http://*.local
+	http://*.lan
+trusted_clients = 
+	10.0.0.0/8
+	127.0.0.0/8
+	169.254.0.0/16
+	172.16.0.0/12
+	192.168.0.0/16
+	FE80::/10
+	::1/128
+	127.0.0.1
+
+[update_manager]
+
+[announcements]
+subscriptions = 
+	mainsail
+
+[history]
+
+[update_manager mainsail]
+type = web
+repo = mainsail-crew/mainsail
+path = ~/mainsail
+
+[update_manager KlipperScreen]
+type = git_repo
+path = ~/KlipperScreen
+origin = https://github.com/jordanruthe/KlipperScreen.git
+env = ~/.KlipperScreen-env/bin/python
+requirements = scripts/KlipperScreen-requirements.txt
+install_script = scripts/KlipperScreen-install.sh
+managed_services = KlipperScreen
+
+[update_manager crowsnest]
+type = git_repo
+path = ~/crowsnest
+origin = https://github.com/mainsail-crew/crowsnest.git
+install_script = tools/pkglist.sh
+
+[update_manager moonraker-obico]
+type = git_repo
+path = ~/moonraker-obico
+origin = https://github.com/TheSpaghettiDetective/moonraker-obico.git
+env = /home/pi/moonraker-obico-env/bin/python
+requirements = requirements.txt
+install_script = install.sh
+managed_services = 
+	moonraker-obico
+
+[update_manager nevermore]
+type = git_repo
+path = ~/nevermore-controller
+origin = https://github.com/sanaahamel/nevermore-controller.git
+primary_branch = main
+is_system_service = False
+
+[update_manager klipper-backup]
+type = git_repo
+path = ~/klipper-backup
+origin = https://github.com/Staubgeborener/klipper-backup.git
+managed_services = moonraker
+primary_branch = main
+
+[update_manager katapult]
+type = git_repo
+origin = git clone https://github.com/Arksine/katapult
+path = ~/katapult
+is_system_service = False
+
+#################################################################
+All Configuration Files:
+/home/pi/klipper_config/moonraker.conf
+/home/pi/klipper_config/moonraker-obico-update.cfg
+#################################################################
+Loading Sqlite database provider. Sqlite Version: 3.34.1
+Unsafe Shutdown Count: 42
+
+System Info:
+
+***python***
+  version: (3, 9, 2, 'final', 0)
+  version_string: 3.9.2 (default, Mar 12 2021, 04:06:34)  [GCC 10.2.1 20210110]
+
+***cpu_info***
+  cpu_count: 4
+  bits: 32bit
+  processor: armv7l
+  cpu_desc: ARMv7 Processor rev 3 (v7l)
+  serial_number: 10000000f4998e7d
+  hardware_desc: BCM2711
+  model: Raspberry Pi 4 Model B Rev 1.1
+  total_memory: 1917108
+  memory_units: kB
+
+***sd_info***
+  manufacturer_id: 03
+  manufacturer: Sandisk
+  oem_id: 5344
+  product_name: SC16G
+  product_revision: 8.0
+  serial_number: e0368251
+  manufacturer_date: 6/2020
+  capacity: 14.8 GiB
+  total_bytes: 15931539456
+
+***distribution***
+  name: Raspbian GNU/Linux 11 (bullseye)
+  id: raspbian
+  version: 11
+  version_parts: {'major': '11', 'minor': '', 'build_number': ''}
+  like: debian
+  codename: bullseye
+  release_info: {'name': '0.', 'version_id': '2.0', 'id': 'mainsailos'}
+  kernel_version: 5.10.103-v7l+
+
+***virtualization***
+  virt_type: none
+  virt_identifier: none
+
+***network***
+
+***canbus***
+
+***Allowed Services***
+  klipper_mcu
+  webcamd
+  MoonCord
+  KlipperScreen
+  moonraker-telegram-bot
+  moonraker-obico
+  sonar
+  crowsnest
+  octoeverywhere
+  ratos-configurator
+Module libcamera unavailble, import failed
+
+Systemd unit moonraker.service:
+unit_name: moonraker.service
+is_default: True
+manager: systemd
+Properties:
+**Requires=['sysinit.target', 'system.slice', '-.mount', 'network-online.target']
+**After=['sysinit.target', 'system.slice', '-.mount', 'systemd-journald.socket', 'network-online.target', 'basic.target']
+**SupplementaryGroups=['moonraker-admin']
+**EnvironmentFiles=/home/pi/printer_data/systemd/moonraker.env
+**ExecStart=/home/pi/moonraker-env/bin/python $MOONRAKER_ARGS
+**WorkingDirectory=/home/pi/moonraker
+**FragmentPath=/etc/systemd/system/moonraker.service
+**Description=API Server for Klipper SV1
+**User=pi
+
+Systemd unit klipper.service:
+unit_name: klipper.service
+is_default: True
+manager: systemd
+Properties:
+**Requires=['sysinit.target', 'system.slice']
+**After=['systemd-journald.socket', 'sysinit.target', 'basic.target', 'system.slice']
+**SupplementaryGroups=[]
+**EnvironmentFiles=[]
+**ExecStart=/etc/init.d/klipper start
+**WorkingDirectory=
+**FragmentPath=/run/systemd/generator.late/klipper.service
+**Description=LSB: Klipper daemon
+**User=
+Git Repo moonraker: No warnings detected
+Git Repo klipper: Warnings detected:
+  Repo has untracked source files: ['klippy/extras/nevermore.py']
+Git Repo KlipperScreen: No warnings detected
+Git Repo crowsnest: No warnings detected
+Git Repo moonraker-obico: No warnings detected
+Git Repo nevermore: No warnings detected
+Git Repo klipper-backup: No warnings detected
+Git Repo katapult: Warnings detected:
+  Unofficial remote url: https://github.com/Arksine/katapult
+Klipper Version: v0.12.0-316-g96cceed2-dirty
+2024-10-06 00:38:43,136 [application.py:log_request()] - 101 GET /websocket (192.168.1.190) [_TRUSTED_USER_] 4.25ms
+2024-10-06 00:38:43,137 [websockets.py:open()] - Websocket Opened: ID: 3001535840, Proxied: True, User Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/128.0.0.0 Safari/537.36, Host Name: 192.168.1.207
+2024-10-06 00:38:43,280 [websockets.py:_handle_identify()] - Websocket 3001535840 Client Identified - Name: mainsail, Version: 2.12.0, Type: web
+2024-10-06 00:39:43,195 [websockets.py:write_to_socket()] - Websocket closed while writing: 3001535840
+2024-10-06 00:39:48,141 [websockets.py:on_close()] - Websocket Closed: ID: 3001535840 Close Code: None, Close Reason: None, Pong Time Elapsed: 44.99
+2024-10-06 01:39:22,179 [application.py:log_request()] - 101 GET /websocket (192.168.1.190) [_TRUSTED_USER_] 4.15ms
+2024-10-06 01:39:22,179 [websockets.py:open()] - Websocket Opened: ID: 3001534352, Proxied: True, User Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/128.0.0.0 Safari/537.36, Host Name: 192.168.1.207
+2024-10-06 01:39:22,199 [websockets.py:_handle_identify()] - Websocket 3001534352 Client Identified - Name: mainsail, Version: 2.12.0, Type: web
+2024-10-06 01:40:42,385 [websockets.py:write_to_socket()] - Websocket closed while writing: 3001534352
+2024-10-06 01:40:47,182 [websockets.py:on_close()] - Websocket Closed: ID: 3001534352 Close Code: None, Close Reason: None, Pong Time Elapsed: 44.99
+2024-10-06 02:41:48,432 [authorization.py:_prune_conn_handler()] - Trusted Connection Expired, IP: 192.168.1.190
+2024-10-06 02:49:45,125 [authorization.py:_check_trusted_connection()] - Trusted Connection Detected, IP: 192.168.1.190
+2024-10-06 02:49:45,128 [application.py:log_request()] - 101 GET /websocket (192.168.1.190) [_TRUSTED_USER_] 5.64ms
+2024-10-06 02:49:45,129 [websockets.py:open()] - Websocket Opened: ID: 3001534856, Proxied: True, User Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/128.0.0.0 Safari/537.36, Host Name: 192.168.1.207
+2024-10-06 02:49:45,139 [websockets.py:_handle_identify()] - Websocket 3001534856 Client Identified - Name: mainsail, Version: 2.12.0, Type: web
+2024-10-06 02:50:55,288 [websockets.py:write_to_socket()] - Websocket closed while writing: 3001534856
+2024-10-06 02:51:00,134 [websockets.py:on_close()] - Websocket Closed: ID: 3001534856 Close Code: None, Close Reason: None, Pong Time Elapsed: 45.00
+2024-10-06 03:51:48,446 [authorization.py:_prune_conn_handler()] - Trusted Connection Expired, IP: 192.168.1.190
+2024-10-06 04:14:33,473 [authorization.py:_check_trusted_connection()] - Trusted Connection Detected, IP: 192.168.1.190
+2024-10-06 04:14:33,477 [application.py:log_request()] - 101 GET /websocket (192.168.1.190) [_TRUSTED_USER_] 6.80ms
+2024-10-06 04:14:33,478 [websockets.py:open()] - Websocket Opened: ID: 3001536248, Proxied: True, User Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/128.0.0.0 Safari/537.36, Host Name: 192.168.1.207
+2024-10-06 04:14:33,489 [websockets.py:_handle_identify()] - Websocket 3001536248 Client Identified - Name: mainsail, Version: 2.12.0, Type: web
+2024-10-06 04:15:23,614 [websockets.py:write_to_socket()] - Websocket closed while writing: 3001536248
+2024-10-06 04:15:28,481 [websockets.py:on_close()] - Websocket Closed: ID: 3001536248 Close Code: None, Close Reason: None, Pong Time Elapsed: 44.99
+2024-10-06 05:16:48,468 [authorization.py:_prune_conn_handler()] - Trusted Connection Expired, IP: 192.168.1.190
+2024-10-06 05:39:30,313 [authorization.py:_check_trusted_connection()] - Trusted Connection Detected, IP: 192.168.1.190
+2024-10-06 05:39:30,315 [application.py:log_request()] - 101 GET /websocket (192.168.1.190) [_TRUSTED_USER_] 4.92ms
+2024-10-06 05:39:30,316 [websockets.py:open()] - Websocket Opened: ID: 3001533368, Proxied: True, User Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/128.0.0.0 Safari/537.36, Host Name: 192.168.1.207
+2024-10-06 05:39:30,325 [websockets.py:_handle_identify()] - Websocket 3001533368 Client Identified - Name: mainsail, Version: 2.12.0, Type: web
+2024-10-06 05:40:00,357 [websockets.py:write_to_socket()] - Websocket closed while writing: 3001533368
+2024-10-06 05:40:05,319 [websockets.py:on_close()] - Websocket Closed: ID: 3001533368 Close Code: None, Close Reason: None, Pong Time Elapsed: 35.01
+2024-10-06 06:01:01,033 [application.py:log_request()] - 101 GET /websocket (192.168.1.190) [_TRUSTED_USER_] 4.28ms
+2024-10-06 06:01:01,034 [websockets.py:open()] - Websocket Opened: ID: 3001533416, Proxied: True, User Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/128.0.0.0 Safari/537.36, Host Name: 192.168.1.207
+2024-10-06 06:01:01,046 [websockets.py:_handle_identify()] - Websocket 3001533416 Client Identified - Name: mainsail, Version: 2.12.0, Type: web
+2024-10-06 06:02:21,242 [websockets.py:write_to_socket()] - Websocket closed while writing: 3001533416
+2024-10-06 06:02:26,036 [websockets.py:on_close()] - Websocket Closed: ID: 3001533416 Close Code: None, Close Reason: None, Pong Time Elapsed: 44.99
+2024-10-06 07:01:48,495 [authorization.py:_prune_conn_handler()] - Trusted Connection Expired, IP: 192.168.1.190
+2024-10-06 07:25:47,130 [authorization.py:_check_trusted_connection()] - Trusted Connection Detected, IP: 192.168.1.190
+2024-10-06 07:25:47,133 [application.py:log_request()] - 101 GET /websocket (192.168.1.190) [_TRUSTED_USER_] 6.11ms
+2024-10-06 07:25:47,134 [websockets.py:open()] - Websocket Opened: ID: 3001533464, Proxied: True, User Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/128.0.0.0 Safari/537.36, Host Name: 192.168.1.207
+2024-10-06 07:25:47,148 [websockets.py:_handle_identify()] - Websocket 3001533464 Client Identified - Name: mainsail, Version: 2.12.0, Type: web
+2024-10-06 07:26:57,302 [websockets.py:write_to_socket()] - Websocket closed while writing: 3001533464
+2024-10-06 07:27:02,138 [websockets.py:on_close()] - Websocket Closed: ID: 3001533464 Close Code: None, Close Reason: None, Pong Time Elapsed: 45.00
+2024-10-06 08:02:20,037 [application.py:log_request()] - 101 GET /websocket (192.168.1.190) [_TRUSTED_USER_] 5.07ms
+2024-10-06 08:02:20,038 [websockets.py:open()] - Websocket Opened: ID: 3001535096, Proxied: True, User Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/128.0.0.0 Safari/537.36, Host Name: 192.168.1.207
+2024-10-06 08:02:20,135 [websockets.py:_handle_identify()] - Websocket 3001535096 Client Identified - Name: mainsail, Version: 2.12.0, Type: web
+2024-10-06 08:03:20,070 [websockets.py:write_to_socket()] - Websocket closed while writing: 3001535096
+2024-10-06 08:03:25,043 [websockets.py:on_close()] - Websocket Closed: ID: 3001535096 Close Code: None, Close Reason: None, Pong Time Elapsed: 44.99
+2024-10-06 09:03:32,951 [application.py:log_request()] - 101 GET /websocket (192.168.1.190) [_TRUSTED_USER_] 4.82ms
+2024-10-06 09:03:32,952 [websockets.py:open()] - Websocket Opened: ID: 3001536224, Proxied: True, User Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/128.0.0.0 Safari/537.36, Host Name: 192.168.1.207
+2024-10-06 09:03:32,965 [websockets.py:_handle_identify()] - Websocket 3001536224 Client Identified - Name: mainsail, Version: 2.12.0, Type: web
+2024-10-06 09:04:23,205 [websockets.py:write_to_socket()] - Websocket closed while writing: 3001536224
+2024-10-06 09:04:27,957 [websockets.py:on_close()] - Websocket Closed: ID: 3001536224 Close Code: None, Close Reason: None, Pong Time Elapsed: 44.99
+2024-10-06 10:04:44,874 [application.py:log_request()] - 101 GET /websocket (192.168.1.190) [_TRUSTED_USER_] 4.23ms
+2024-10-06 10:04:44,875 [websockets.py:open()] - Websocket Opened: ID: 3001535000, Proxied: True, User Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/128.0.0.0 Safari/537.36, Host Name: 192.168.1.207
+2024-10-06 10:04:44,888 [websockets.py:_handle_identify()] - Websocket 3001535000 Client Identified - Name: mainsail, Version: 2.12.0, Type: web
+2024-10-06 10:05:15,114 [websockets.py:write_to_socket()] - Websocket closed while writing: 3001535000
+2024-10-06 10:05:19,879 [websockets.py:on_close()] - Websocket Closed: ID: 3001535000 Close Code: None, Close Reason: None, Pong Time Elapsed: 35.01
+2024-10-06 10:25:21,839 [application.py:log_request()] - 101 GET /websocket (192.168.1.190) [_TRUSTED_USER_] 6.06ms
+2024-10-06 10:25:21,840 [websockets.py:open()] - Websocket Opened: ID: 3001533704, Proxied: True, User Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/128.0.0.0 Safari/537.36, Host Name: 192.168.1.207
+2024-10-06 10:25:21,866 [websockets.py:_handle_identify()] - Websocket 3001533704 Client Identified - Name: mainsail, Version: 2.12.0, Type: web
+2024-10-06 10:26:41,889 [websockets.py:write_to_socket()] - Websocket closed while writing: 3001533704
+2024-10-06 10:26:46,844 [websockets.py:on_close()] - Websocket Closed: ID: 3001533704 Close Code: None, Close Reason: None, Pong Time Elapsed: 44.98
+2024-10-06 11:02:31,775 [application.py:log_request()] - 101 GET /websocket (192.168.1.190) [_TRUSTED_USER_] 4.28ms
+2024-10-06 11:02:31,776 [websockets.py:open()] - Websocket Opened: ID: 3001534640, Proxied: True, User Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/128.0.0.0 Safari/537.36, Host Name: 192.168.1.207
+2024-10-06 11:02:31,785 [websockets.py:_handle_identify()] - Websocket 3001534640 Client Identified - Name: mainsail, Version: 2.12.0, Type: web
+2024-10-06 11:03:51,862 [websockets.py:write_to_socket()] - Websocket closed while writing: 3001534640
+2024-10-06 11:03:56,780 [websockets.py:on_close()] - Websocket Closed: ID: 3001534640 Close Code: None, Close Reason: None, Pong Time Elapsed: 44.99
+2024-10-06 11:05:24,777 [application.py:log_request()] - 101 GET /websocket (192.168.1.190) [_TRUSTED_USER_] 4.94ms
+2024-10-06 11:05:24,778 [websockets.py:open()] - Websocket Opened: ID: 3001534328, Proxied: True, User Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/128.0.0.0 Safari/537.36, Host Name: 192.168.1.207
+2024-10-06 11:05:24,788 [websockets.py:_handle_identify()] - Websocket 3001534328 Client Identified - Name: mainsail, Version: 2.12.0, Type: web
+2024-10-06 11:06:24,841 [websockets.py:write_to_socket()] - Websocket closed while writing: 3001534328
+2024-10-06 11:06:29,783 [websockets.py:on_close()] - Websocket Closed: ID: 3001534328 Close Code: None, Close Reason: None, Pong Time Elapsed: 45.00
+2024-10-06 11:58:59,528 [authorization.py:_check_trusted_connection()] - Trusted Connection Detected, IP: 127.0.0.1
+2024-10-06 11:59:01,146 [klippy_apis.py:start_print()] - Requesting Job Start, filename = Screen Stand x 4.gcode
+2024-10-06 11:59:01,254 [job_state.py:_status_update()] - Job Started: Screen Stand x 4.gcode
+2024-10-06 12:03:15,203 [klippy_apis.py:pause_print()] - Requesting job pause...
+2024-10-06 12:04:18,669 [klippy_apis.py:resume_print()] - Requesting job resume...
+2024-10-06 12:06:37,766 [application.py:log_request()] - 101 GET /websocket (192.168.1.190) [_TRUSTED_USER_] 5.15ms
+2024-10-06 12:06:37,767 [websockets.py:open()] - Websocket Opened: ID: 3001534904, Proxied: True, User Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/128.0.0.0 Safari/537.36, Host Name: 192.168.1.207
+2024-10-06 12:06:37,785 [websockets.py:_handle_identify()] - Websocket 3001534904 Client Identified - Name: mainsail, Version: 2.12.0, Type: web
+2024-10-06 12:07:07,821 [websockets.py:write_to_socket()] - Websocket closed while writing: 3001534904
+2024-10-06 12:07:12,770 [websockets.py:on_close()] - Websocket Closed: ID: 3001534904 Close Code: None, Close Reason: None, Pong Time Elapsed: 35.01
+2024-10-06 12:38:51,533 [klippy_connection.py:_process_status_update()] - Klippy has shutdown
+2024-10-06 12:38:51,558 [proc_stats.py:_handle_shutdown()] - 
+Moonraker System Usage Statistics:
+System Time: 1728214701.798863, Usage: 4.82%, Memory: 33212 kB
+System Time: 1728214702.800996, Usage: 1.99%, Memory: 33212 kB
+System Time: 1728214703.802458, Usage: 2.23%, Memory: 33212 kB
+System Time: 1728214704.804526, Usage: 2.12%, Memory: 33212 kB
+System Time: 1728214705.805953, Usage: 2.36%, Memory: 33212 kB
+System Time: 1728214706.808084, Usage: 2.31%, Memory: 33212 kB
+System Time: 1728214707.809297, Usage: 2.34%, Memory: 33212 kB
+System Time: 1728214708.812171, Usage: 2.41%, Memory: 33212 kB
+System Time: 1728214709.811621, Usage: 2.92%, Memory: 33212 kB
+System Time: 1728214710.813632, Usage: 2.17%, Memory: 33212 kB
+System Time: 1728214711.815647, Usage: 4.34%, Memory: 33212 kB
+System Time: 1728214712.815391, Usage: 2.3%, Memory: 33212 kB
+System Time: 1728214713.817872, Usage: 2.11%, Memory: 33212 kB
+System Time: 1728214714.817956, Usage: 2.23%, Memory: 33212 kB
+System Time: 1728214715.819067, Usage: 2.32%, Memory: 33212 kB
+System Time: 1728214716.820162, Usage: 2.18%, Memory: 33212 kB
+System Time: 1728214717.820873, Usage: 2.16%, Memory: 33212 kB
+System Time: 1728214718.822277, Usage: 2.2%, Memory: 33212 kB
+System Time: 1728214719.823456, Usage: 2.65%, Memory: 33212 kB
+System Time: 1728214720.824397, Usage: 2.09%, Memory: 33212 kB
+System Time: 1728214721.826612, Usage: 3.97%, Memory: 33212 kB
+System Time: 1728214722.828184, Usage: 2.25%, Memory: 33212 kB
+System Time: 1728214723.828368, Usage: 2.3%, Memory: 33212 kB
+System Time: 1728214724.829649, Usage: 2.26%, Memory: 33212 kB
+System Time: 1728214725.830667, Usage: 2.44%, Memory: 33212 kB
+System Time: 1728214726.831010, Usage: 2.37%, Memory: 33212 kB
+System Time: 1728214727.832197, Usage: 2.35%, Memory: 33212 kB
+System Time: 1728214728.833360, Usage: 2.21%, Memory: 33212 kB
+System Time: 1728214729.835536, Usage: 2.85%, Memory: 33212 kB
+System Time: 1728214730.837249, Usage: 2.43%, Memory: 33212 kB
+CPU Temperature: 26.284
+2024-10-06 12:38:51,562 [proc_stats.py:_handle_shutdown()] - Throttled Flags: 
+2024-10-06 13:06:48,585 [authorization.py:_prune_conn_handler()] - Trusted Connection Expired, IP: 192.168.1.190
+2024-10-06 13:06:48,585 [authorization.py:_prune_conn_handler()] - Trusted Connection Expired, IP: 127.0.0.1
+2024-10-06 13:07:01,805 [authorization.py:_check_trusted_connection()] - Trusted Connection Detected, IP: 192.168.1.190
+2024-10-06 13:07:01,809 [application.py:log_request()] - 101 GET /websocket (192.168.1.190) [_TRUSTED_USER_] 6.20ms
+2024-10-06 13:07:01,809 [websockets.py:open()] - Websocket Opened: ID: 3001534088, Proxied: True, User Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/128.0.0.0 Safari/537.36, Host Name: 192.168.1.207
+2024-10-06 13:07:01,841 [websockets.py:_handle_identify()] - Websocket 3001534088 Client Identified - Name: mainsail, Version: 2.12.0, Type: web
+2024-10-06 13:08:21,990 [websockets.py:write_to_socket()] - Websocket closed while writing: 3001534088
+2024-10-06 13:08:26,812 [websockets.py:on_close()] - Websocket Closed: ID: 3001534088 Close Code: None, Close Reason: None, Pong Time Elapsed: 44.97
+-------------------- Log Start | Sun Oct  6 12:12:27 2024 --------------------
+platform: Linux-5.10.103-v7l+-armv7l-with-glibc2.31
+data_path: /home/pi/printer_data
+is_default_data_path: False
+config_file: /home/pi/klipper_config/moonraker.conf
+backup_config: /home/pi/klipper_config/.moonraker.conf.bkp
+startup_warnings: []
+verbose: False
+debug: False
+asyncio_debug: False
+is_backup_config: False
+is_python_package: False
+instance_uuid: fcaf964132544f489c1d4b307e624771
+unix_socket_path: /home/pi/printer_data/comms/moonraker.sock
+software_version: v0.9.3-0-g71f9e67
+git_branch: master
+git_remote: origin
+git_repo_url: https://github.com/Arksine/moonraker.git
+modified_files: []
+unofficial_components: []
+log_file: /home/pi/printer_data/logs/moonraker.log
+python_version: 3.9.2 (default, Mar 12 2021, 04:06:34)  [GCC 10.2.1 20210110]
+launch_args: /home/pi/moonraker-env/bin/python /home/pi/moonraker/moonraker/moonraker.py -d /home/pi/printer_data -c /home/pi/klipper_config/moonraker.conf
+msgspec_enabled: False
+uvloop_enabled: False
+2024-10-06 13:12:27,203 [confighelper.py:read_file()] - Configuration File '/home/pi/klipper_config/moonraker.conf' parsed, total size: 2086 B
+2024-10-06 13:12:27,203 [server.py:add_log_rollover_item()] - 
+#################### Moonraker Configuration ####################
+
+[server]
+host = 0.0.0.0
+port = 7125
+klippy_uds_address = /tmp/klippy_uds
+
+[file_manager]
+enable_object_processing = True
+
+[data_store]
+temperature_store_size = 600
+gcode_store_size = 1000
+
+[authorization]
+cors_domains = 
+	https://my.mainsail.xyz
+	http://my.mainsail.xyz
+	http://*.local
+	http://*.lan
+trusted_clients = 
+	10.0.0.0/8
+	127.0.0.0/8
+	169.254.0.0/16
+	172.16.0.0/12
+	192.168.0.0/16
+	FE80::/10
+	::1/128
+	127.0.0.1
+
+[update_manager]
+
+[announcements]
+subscriptions = 
+	mainsail
+
+[history]
+
+[update_manager mainsail]
+type = web
+repo = mainsail-crew/mainsail
+path = ~/mainsail
+
+[update_manager KlipperScreen]
+type = git_repo
+path = ~/KlipperScreen
+origin = https://github.com/jordanruthe/KlipperScreen.git
+env = ~/.KlipperScreen-env/bin/python
+requirements = scripts/KlipperScreen-requirements.txt
+install_script = scripts/KlipperScreen-install.sh
+managed_services = KlipperScreen
+
+[update_manager crowsnest]
+type = git_repo
+path = ~/crowsnest
+origin = https://github.com/mainsail-crew/crowsnest.git
+install_script = tools/pkglist.sh
+
+[update_manager moonraker-obico]
+type = git_repo
+path = ~/moonraker-obico
+origin = https://github.com/TheSpaghettiDetective/moonraker-obico.git
+env = /home/pi/moonraker-obico-env/bin/python
+requirements = requirements.txt
+install_script = install.sh
+managed_services = 
+	moonraker-obico
+
+[update_manager nevermore]
+type = git_repo
+path = ~/nevermore-controller
+origin = https://github.com/sanaahamel/nevermore-controller.git
+primary_branch = main
+is_system_service = False
+
+[update_manager klipper-backup]
+type = git_repo
+path = ~/klipper-backup
+origin = https://github.com/Staubgeborener/klipper-backup.git
+managed_services = moonraker
+primary_branch = main
+
+[update_manager katapult]
+type = git_repo
+origin = git clone https://github.com/Arksine/katapult
+path = ~/katapult
+is_system_service = False
+
+#################################################################
+All Configuration Files:
+/home/pi/klipper_config/moonraker.conf
+/home/pi/klipper_config/moonraker-obico-update.cfg
+#################################################################
+2024-10-06 13:12:27,583 [server.py:load_component()] - Component (secrets) loaded
+2024-10-06 13:12:27,596 [server.py:load_component()] - Component (template) loaded
+2024-10-06 13:12:27,606 [server.py:load_component()] - Component (klippy_connection) loaded
+2024-10-06 13:12:28,734 [server.py:load_component()] - Component (application) loaded
+2024-10-06 13:12:28,770 [server.py:load_component()] - Component (websockets) loaded
+2024-10-06 13:12:28,819 [server.py:add_log_rollover_item()] - Loading Sqlite database provider. Sqlite Version: 3.34.1
+2024-10-06 13:12:28,855 [server.py:add_log_rollover_item()] - Unsafe Shutdown Count: 43
+2024-10-06 13:12:28,864 [server.py:load_component()] - Component (database) loaded
+2024-10-06 13:12:29,073 [server.py:load_component()] - Component (dbus_manager) loaded
+2024-10-06 13:12:29,176 [file_manager.py:__init__()] - Using File System Observer: inotify
+2024-10-06 13:12:29,292 [server.py:load_component()] - Component (file_manager) loaded
+2024-10-06 13:12:29,358 [database.py:register_table()] - Found registered table authorized_users
+2024-10-06 13:12:29,361 [authorization.py:__init__()] - Authorization Configuration Loaded
+Trusted Clients:
+127.0.0.1
+10.0.0.0/8
+127.0.0.0/8
+169.254.0.0/16
+172.16.0.0/12
+192.168.0.0/16
+fe80::/10
+::1/128
+CORS Domains:
+https://my\.mainsail\.xyz
+http://my\.mainsail\.xyz
+http://.*\.local
+http://.*\.lan
+2024-10-06 13:12:29,366 [server.py:load_component()] - Component (authorization) loaded
+2024-10-06 13:12:29,381 [server.py:load_component()] - Component (klippy_apis) loaded
+2024-10-06 13:12:29,691 [server.py:add_log_rollover_item()] - 
+System Info:
+
+***python***
+  version: (3, 9, 2, 'final', 0)
+  version_string: 3.9.2 (default, Mar 12 2021, 04:06:34)  [GCC 10.2.1 20210110]
+
+***cpu_info***
+  cpu_count: 4
+  bits: 32bit
+  processor: armv7l
+  cpu_desc: ARMv7 Processor rev 3 (v7l)
+  serial_number: 10000000f4998e7d
+  hardware_desc: BCM2711
+  model: Raspberry Pi 4 Model B Rev 1.1
+  total_memory: 1917108
+  memory_units: kB
+
+***sd_info***
+  manufacturer_id: 03
+  manufacturer: Sandisk
+  oem_id: 5344
+  product_name: SC16G
+  product_revision: 8.0
+  serial_number: e0368251
+  manufacturer_date: 6/2020
+  capacity: 14.8 GiB
+  total_bytes: 15931539456
+
+***distribution***
+  name: Raspbian GNU/Linux 11 (bullseye)
+  id: raspbian
+  version: 11
+  version_parts: {'major': '11', 'minor': '', 'build_number': ''}
+  like: debian
+  codename: bullseye
+  release_info: {'name': '0.', 'version_id': '2.0', 'id': 'mainsailos'}
+  kernel_version: 5.10.103-v7l+
+
+***virtualization***
+  virt_type: none
+  virt_identifier: none
+
+***network***
+
+***canbus***
+
+***Allowed Services***
+  klipper_mcu
+  webcamd
+  MoonCord
+  KlipperScreen
+  moonraker-telegram-bot
+  moonraker-obico
+  sonar
+  crowsnest
+  octoeverywhere
+  ratos-configurator
+2024-10-06 13:12:29,709 [server.py:load_component()] - Component (shell_command) loaded
+2024-10-06 13:12:29,709 [machine.py:__init__()] - Using System Provider: systemd_dbus
+2024-10-06 13:12:29,719 [server.py:add_log_rollover_item()] - Module libcamera unavailble, import failed
+2024-10-06 13:12:29,719 [server.py:load_component()] - Component (machine) loaded
+2024-10-06 13:12:29,735 [server.py:load_component()] - Component (data_store) loaded
+2024-10-06 13:12:29,749 [proc_stats.py:__init__()] - Detected 'vcgencmd', throttle checking enabled
+2024-10-06 13:12:29,750 [server.py:load_component()] - Component (proc_stats) loaded
+2024-10-06 13:12:29,773 [server.py:load_component()] - Component (job_state) loaded
+2024-10-06 13:12:29,788 [server.py:load_component()] - Component (job_queue) loaded
+2024-10-06 13:12:29,794 [database.py:register_table()] - Found registered table job_history
+2024-10-06 13:12:29,795 [database.py:register_table()] - Found registered table job_totals
+2024-10-06 13:12:29,798 [server.py:load_component()] - Component (history) loaded
+2024-10-06 13:12:29,851 [server.py:load_component()] - Component (http_client) loaded
+2024-10-06 13:12:29,860 [server.py:load_component()] - Component (announcements) loaded
+2024-10-06 13:12:29,867 [server.py:load_component()] - Component (webcam) loaded
+2024-10-06 13:12:29,874 [server.py:load_component()] - Component (extensions) loaded
+2024-10-06 13:12:29,976 [base_deploy.py:log_info()] - Git Repo moonraker: Detected virtualenv: /home/pi/moonraker-env
+2024-10-06 13:12:29,981 [base_deploy.py:log_info()] - Git Repo klipper: Detected virtualenv: /home/pi/klippy-env
+2024-10-06 13:12:29,986 [base_deploy.py:log_info()] - Git Repo KlipperScreen: Option 'env' is deprecated, use 'virtualenv' instead.
+2024-10-06 13:12:29,987 [base_deploy.py:log_info()] - Git Repo KlipperScreen: Detected virtualenv: /home/pi/.KlipperScreen-env
+2024-10-06 13:12:30,007 [base_deploy.py:log_info()] - Git Repo moonraker-obico: Option 'env' is deprecated, use 'virtualenv' instead.
+2024-10-06 13:12:30,008 [base_deploy.py:log_info()] - Git Repo moonraker-obico: Detected virtualenv: /home/pi/moonraker-obico-env
+2024-10-06 13:12:30,024 [server.py:load_component()] - Component (update_manager) loaded
+2024-10-06 13:12:30,027 [server.py:_initialize_component()] - Performing Component Post Init: [database]
+2024-10-06 13:12:30,063 [server.py:_initialize_component()] - Performing Component Post Init: [dbus_manager]
+2024-10-06 13:12:30,167 [server.py:_initialize_component()] - Performing Component Post Init: [file_manager]
+2024-10-06 13:12:30,506 [server.py:_initialize_component()] - Performing Component Post Init: [authorization]
+2024-10-06 13:12:31,057 [server.py:_initialize_component()] - Performing Component Post Init: [machine]
+2024-10-06 13:12:31,064 [machine.py:validation_init()] - Installation version in database up to date
+2024-10-06 13:12:31,428 [machine.py:check_virt_status()] - No Virtualization Detected
+2024-10-06 13:12:31,447 [machine.py:_find_public_ip()] - Detected Local IP: 192.168.1.207
+2024-10-06 13:12:31,449 [webcam.py:_set_default_host_ip()] - Default public webcam address set: http://192.168.1.207
+2024-10-06 13:12:31,528 [server.py:add_log_rollover_item()] - 
+Systemd unit moonraker.service:
+unit_name: moonraker.service
+is_default: True
+manager: systemd
+Properties:
+**Requires=['network-online.target', '-.mount', 'system.slice', 'sysinit.target']
+**After=['network-online.target', '-.mount', 'system.slice', 'sysinit.target', 'systemd-journald.socket', 'basic.target']
+**SupplementaryGroups=['moonraker-admin']
+**EnvironmentFiles=/home/pi/printer_data/systemd/moonraker.env
+**ExecStart=/home/pi/moonraker-env/bin/python $MOONRAKER_ARGS
+**WorkingDirectory=/home/pi/moonraker
+**FragmentPath=/etc/systemd/system/moonraker.service
+**Description=API Server for Klipper SV1
+**User=pi
+2024-10-06 13:12:31,528 [server.py:_initialize_component()] - Performing Component Post Init: [proc_stats]
+2024-10-06 13:12:31,528 [server.py:_initialize_component()] - Performing Component Post Init: [history]
+2024-10-06 13:12:31,583 [server.py:_initialize_component()] - Performing Component Post Init: [announcements]
+2024-10-06 13:12:31,588 [server.py:_initialize_component()] - Performing Component Post Init: [webcam]
+2024-10-06 13:12:31,589 [webcam.py:_set_default_host_ip()] - Default public webcam address set: http://192.168.1.207
+2024-10-06 13:12:31,596 [server.py:_initialize_component()] - Performing Component Post Init: [klippy_connection]
+2024-10-06 13:12:31,597 [server.py:add_log_rollover_item()] - 
+Systemd unit klipper.service:
+unit_name: klipper.service
+is_default: True
+manager: systemd
+Properties:
+**Requires=['sysinit.target', 'system.slice']
+**After=['systemd-journald.socket', 'sysinit.target', 'basic.target', 'system.slice']
+**SupplementaryGroups=[]
+**EnvironmentFiles=[]
+**ExecStart=/etc/init.d/klipper start
+**WorkingDirectory=
+**FragmentPath=/run/systemd/generator.late/klipper.service
+**Description=LSB: Klipper daemon
+**User=
+2024-10-06 13:12:31,597 [server.py:_initialize_component()] - Performing Component Post Init: [update_manager]
+2024-10-06 13:12:32,059 [base_deploy.py:log_info()] - PackageDeploy: PackageKit Provider Configured
+2024-10-06 13:12:32,061 [base_deploy.py:log_info()] - Git Repo moonraker: Stored pip version: 24.0
+2024-10-06 13:12:32,063 [git_deploy.py:log_repo_info()] - Git Repo moonraker Detected:
+Owner: Arksine
+Repository Name: moonraker
+Path: /home/pi/moonraker
+Remote: origin
+Branch: master
+Remote URL: https://github.com/Arksine/moonraker.git
+Recovery URL: https://github.com/Arksine/moonraker.git
+Current Commit SHA: 71f9e677b81afcc6b99dd5002f595025c38edc7b
+Upstream Commit SHA: 71f9e677b81afcc6b99dd5002f595025c38edc7b
+Current Version: v0.9.3-0-g71f9e677
+Upstream Version: v0.9.3-0-g71f9e677
+Rollback Commit: b40751ba9d7f05e7da81636e3e4a5735ef85bb27
+Rollback Branch: master
+Rollback Version: v0.9.2-0-gb40751ba
+Is Dirty: False
+Is Detached: False
+Is Shallow: False
+Commits Behind Count: 0
+Diverged: False
+Pinned Commit: None
+2024-10-06 13:12:32,071 [base_deploy.py:log_info()] - Git Repo klipper: Stored pip version: 23.3.2
+2024-10-06 13:12:32,072 [git_deploy.py:log_repo_info()] - Git Repo klipper Detected:
+Owner: Klipper3d
+Repository Name: klipper
+Path: /home/pi/klipper
+Remote: origin
+Branch: master
+Remote URL: https://github.com/Klipper3d/klipper.git
+Recovery URL: https://github.com/Klipper3d/klipper.git
+Current Commit SHA: 96cceed23efc7a3759ecfba0a228cdcb4d5244d3
+Upstream Commit SHA: 96cceed23efc7a3759ecfba0a228cdcb4d5244d3
+Current Version: v0.12.0-316-g96cceed2
+Upstream Version: v0.12.0-316-g96cceed2
+Rollback Commit: d7d9092a920b3bd2bede4b570c66ddaa52df3f19
+Rollback Branch: master
+Rollback Version: v0.12.0-274-gd7d9092a
+Is Dirty: False
+Is Detached: False
+Is Shallow: False
+Commits Behind Count: 0
+Diverged: False
+Pinned Commit: None
+Repo Warnings:
+  Repo has untracked source files: ['klippy/extras/nevermore.py']
+2024-10-06 13:12:32,088 [base_deploy.py:log_info()] - Web Client mainsail: Detected
+Repo: mainsail-crew/mainsail
+Channel: stable
+Path: /home/pi/mainsail
+Local Version: v2.12.0
+Remote Version: v2.12.0
+Valid: True
+Fallback Detected: False
+Pre-release: False
+Download Url: https://github.com/mainsail-crew/mainsail/releases/download/v2.12.0/mainsail.zip
+Download Size: 2545249
+Content Type: application/zip
+Rollback Version: v2.11.2
+Rollback Repo: mainsail-crew/mainsail
+2024-10-06 13:12:32,093 [base_deploy.py:log_info()] - Git Repo KlipperScreen: Stored pip version: 23.0
+2024-10-06 13:12:32,096 [git_deploy.py:log_repo_info()] - Git Repo KlipperScreen Detected:
+Owner: jordanruthe
+Repository Name: KlipperScreen
+Path: /home/pi/KlipperScreen
+Remote: origin
+Branch: master
+Remote URL: https://github.com/jordanruthe/KlipperScreen.git
+Recovery URL: https://github.com/jordanruthe/KlipperScreen.git
+Current Commit SHA: 71eef9ee1f23aa4fd6b68169cfe5dd7908e478b2
+Upstream Commit SHA: 71eef9ee1f23aa4fd6b68169cfe5dd7908e478b2
+Current Version: v0.4.4-20-g71eef9ee
+Upstream Version: v0.4.4-20-g71eef9ee
+Rollback Commit: 8e91576470e5905cfdfd14d1d641ad854643a414
+Rollback Branch: master
+Rollback Version: v0.4.3-49-g8e915764
+Is Dirty: False
+Is Detached: False
+Is Shallow: False
+Commits Behind Count: 0
+Diverged: False
+Pinned Commit: None
+2024-10-06 13:12:32,100 [git_deploy.py:log_repo_info()] - Git Repo crowsnest Detected:
+Owner: mainsail-crew
+Repository Name: crowsnest
+Path: /home/pi/crowsnest
+Remote: origin
+Branch: master
+Remote URL: https://github.com/mainsail-crew/crowsnest.git
+Recovery URL: https://github.com/mainsail-crew/crowsnest.git
+Current Commit SHA: d75a3aeb018384e59d03518754f6148c98894ed9
+Upstream Commit SHA: d75a3aeb018384e59d03518754f6148c98894ed9
+Current Version: v4.1.9-1-gd75a3aeb
+Upstream Version: v4.1.9-1-gd75a3aeb
+Rollback Commit: e209d19d3c26b614799f194c53380aa2b5dff641
+Rollback Branch: master
+Rollback Version: v4.1.2-1-ge209d19d
+Is Dirty: False
+Is Detached: False
+Is Shallow: False
+Commits Behind Count: 0
+Diverged: False
+Pinned Commit: None
+2024-10-06 13:12:32,102 [base_deploy.py:log_info()] - Git Repo moonraker-obico: Stored pip version: 23.3.2
+2024-10-06 13:12:32,104 [git_deploy.py:log_repo_info()] - Git Repo moonraker-obico Detected:
+Owner: TheSpaghettiDetective
+Repository Name: moonraker-obico
+Path: /home/pi/moonraker-obico
+Remote: origin
+Branch: master
+Remote URL: https://github.com/TheSpaghettiDetective/moonraker-obico.git
+Recovery URL: https://github.com/TheSpaghettiDetective/moonraker-obico.git
+Current Commit SHA: 4c0b7b6c35d3b5a611de5731e7d1dfe10c6362df
+Upstream Commit SHA: 4c0b7b6c35d3b5a611de5731e7d1dfe10c6362df
+Current Version: v2.0.9-0-g4c0b7b6c
+Upstream Version: v2.0.9-0-g4c0b7b6c
+Rollback Commit: 3ceb08564eee69aa46935ccb60fbb19c2a207bac
+Rollback Branch: master
+Rollback Version: v2.0.3-0-g3ceb0856
+Is Dirty: False
+Is Detached: False
+Is Shallow: False
+Commits Behind Count: 0
+Diverged: False
+Pinned Commit: None
+2024-10-06 13:12:32,113 [git_deploy.py:log_repo_info()] - Git Repo nevermore Detected:
+Owner: SanaaHamel
+Repository Name: nevermore-controller
+Path: /home/pi/nevermore-controller
+Remote: origin
+Branch: main
+Remote URL: https://github.com/SanaaHamel/nevermore-controller
+Recovery URL: https://github.com/SanaaHamel/nevermore-controller
+Current Commit SHA: 4c69464a0a83d4afba1fc8a28567378ab0b75ed2
+Upstream Commit SHA: 4c69464a0a83d4afba1fc8a28567378ab0b75ed2
+Current Version: v0.15.1-3-g4c69464a
+Upstream Version: v0.15.1-3-g4c69464a
+Rollback Commit: a75959258088fbec7cf829352b18a39a122f9901
+Rollback Branch: main
+Rollback Version: v0.15.1-2-ga7595925
+Is Dirty: False
+Is Detached: False
+Is Shallow: False
+Commits Behind Count: 0
+Diverged: False
+Pinned Commit: None
+2024-10-06 13:12:32,118 [git_deploy.py:log_repo_info()] - Git Repo klipper-backup Detected:
+Owner: Staubgeborener
+Repository Name: klipper-backup
+Path: /home/pi/klipper-backup
+Remote: origin
+Branch: main
+Remote URL: https://github.com/Staubgeborener/klipper-backup.git
+Recovery URL: https://github.com/Staubgeborener/klipper-backup.git
+Current Commit SHA: 35a26f1fa77db53eff8814514ed47be6d854e034
+Upstream Commit SHA: 35a26f1fa77db53eff8814514ed47be6d854e034
+Current Version: v1.3.1-18-g35a26f1f
+Upstream Version: v1.3.1-18-g35a26f1f
+Rollback Commit: 260b84f38225fb25f81c2c2689319dd7a760459c
+Rollback Branch: main
+Rollback Version: v1.3.1-2-g260b84f3
+Is Dirty: False
+Is Detached: False
+Is Shallow: False
+Commits Behind Count: 0
+Diverged: False
+Pinned Commit: None
+2024-10-06 13:12:32,124 [git_deploy.py:log_repo_info()] - Git Repo katapult Detected:
+Owner: Arksine
+Repository Name: katapult
+Path: /home/pi/katapult
+Remote: origin
+Branch: master
+Remote URL: https://github.com/Arksine/katapult
+Recovery URL: https://github.com/Arksine/katapult
+Current Commit SHA: 90eb71b610669aaaab5ed3705c5b6361ac50dbb6
+Upstream Commit SHA: 90eb71b610669aaaab5ed3705c5b6361ac50dbb6
+Current Version: v0.0.1-75-g90eb71b6
+Upstream Version: v0.0.1-75-g90eb71b6
+Rollback Commit: 3e23332eb188244e88f5ff60aecf077cd32bcd0c
+Rollback Branch: master
+Rollback Version: v0.0.1-64-g3e23332e
+Is Dirty: False
+Is Detached: False
+Is Shallow: False
+Commits Behind Count: 0
+Diverged: False
+Pinned Commit: None
+Repo Warnings:
+  Unofficial remote url: https://github.com/Arksine/katapult
+2024-10-06 13:12:32,125 [base_deploy.py:log_info()] - PackageKit: Next refresh in: 5 Days, 6 Hours, 10 Minutes, 44 Seconds
+2024-10-06 13:12:32,125 [base_deploy.py:log_info()] - Git Repo moonraker: Next refresh in: 5 Days, 6 Hours, 10 Minutes, 52 Seconds
+2024-10-06 13:12:32,126 [base_deploy.py:log_info()] - Git Repo klipper: Next refresh in: 5 Days, 6 Hours, 10 Minutes, 53 Seconds
+2024-10-06 13:12:32,126 [base_deploy.py:log_info()] - Web Client mainsail: Next refresh in: 5 Days, 6 Hours, 10 Minutes, 53 Seconds
+2024-10-06 13:12:32,126 [base_deploy.py:log_info()] - Git Repo KlipperScreen: Next refresh in: 5 Days, 6 Hours, 10 Minutes, 54 Seconds
+2024-10-06 13:12:32,126 [base_deploy.py:log_info()] - Git Repo crowsnest: Next refresh in: 5 Days, 6 Hours, 10 Minutes, 55 Seconds
+2024-10-06 13:12:32,127 [base_deploy.py:log_info()] - Git Repo moonraker-obico: Next refresh in: 5 Days, 6 Hours, 10 Minutes, 56 Seconds
+2024-10-06 13:12:32,127 [base_deploy.py:log_info()] - Git Repo nevermore: Next refresh in: 5 Days, 6 Hours, 11 Minutes, 9 Seconds
+2024-10-06 13:12:32,127 [base_deploy.py:log_info()] - Git Repo klipper-backup: Next refresh in: 5 Days, 6 Hours, 10 Minutes, 57 Seconds
+2024-10-06 13:12:32,128 [base_deploy.py:log_info()] - Git Repo katapult: Next refresh in: 5 Days, 6 Hours, 10 Minutes, 59 Seconds
+2024-10-06 13:12:32,134 [extensions.py:start_unix_server()] - Creating Unix Domain Socket at '/home/pi/printer_data/comms/moonraker.sock'
+2024-10-06 13:12:32,135 [server.py:start_server()] - Starting Moonraker on (0.0.0.0, 7125), Hostname: mainsailos
+2024-10-06 13:12:32,137 [application.py:listen()] - SSL Certificate/Key not configured, aborting HTTPS Server startup
+2024-10-06 13:12:32,390 [klippy_connection.py:_do_connect()] - Klippy Connection Established
+2024-10-06 13:12:32,462 [server.py:add_log_rollover_item()] - 
+Systemd unit klipper.service:
+unit_name: klipper.service
+is_default: True
+manager: systemd
+Properties:
+**Requires=['system.slice', 'sysinit.target']
+**After=['systemd-journald.socket', 'sysinit.target', 'basic.target', 'system.slice']
+**SupplementaryGroups=[]
+**EnvironmentFiles=[]
+**ExecStart=/etc/init.d/klipper start
+**WorkingDirectory=
+**FragmentPath=/run/systemd/generator.late/klipper.service
+**Description=LSB: Klipper daemon
+**User=
+2024-10-06 13:12:32,715 [server.py:add_log_rollover_item()] - Klipper Version: v0.12.0-316-g96cceed2-dirty
+2024-10-06 13:12:32,769 [authorization.py:_check_trusted_connection()] - Trusted Connection Detected, IP: 127.0.0.1
+2024-10-06 13:12:32,788 [application.py:log_request()] - 101 GET /websocket (127.0.0.1) [_API_KEY_USER_] 7.89ms
+2024-10-06 13:12:32,789 [websockets.py:open()] - Websocket Opened: ID: 3001938800, Proxied: False, User Agent: , Host Name: 127.0.0.1
+2024-10-06 13:12:32,997 [klippy_connection.py:_request_initial_subscriptions()] - Webhooks Subscribed
+2024-10-06 13:12:32,999 [klippy_connection.py:_request_initial_subscriptions()] - GCode Output Subscribed
+2024-10-06 13:12:33,248 [job_state.py:_handle_started()] - Job state initialized: standby
+2024-10-06 13:12:33,463 [application.py:log_request()] - 101 GET /websocket?token= (127.0.0.1) [_TRUSTED_USER_] 3.67ms
+2024-10-06 13:12:33,464 [websockets.py:open()] - Websocket Opened: ID: 3001794056, Proxied: False, User Agent: , Host Name: 127.0.0.1
+2024-10-06 13:12:33,521 [klippy_connection.py:_check_ready()] - Klippy ready
+2024-10-06 13:12:33,549 [websockets.py:_handle_identify()] - Websocket 3001794056 Client Identified - Name: KlipperScreen, Version: v0.4.4-20-g71eef9ee, Type: display
+2024-10-06 13:12:33,556 [websockets.py:_handle_identify()] - Websocket 3001938800 Client Identified - Name: Obico, Version: 2.0.9, Type: agent
+2024-10-06 13:12:33,582 [common.py:build_error()] - JSON-RPC Request Error - Requested Method: printer.objects.subscribe, Code: 400, Message: Invalid argument
+2024-10-06 13:12:34,007 [data_store.py:_init_sensors()] - Configuring available sensors: ['temperature_sensor intake', 'temperature_sensor exhaust', 'temperature_sensor raspberry_pi', 'temperature_sensor mcu_temp', 'temperature_sensor SB', 'temperature_sensor chamber', 'heater_bed', 'extruder']
+2024-10-06 13:12:34,146 [file_manager.py:get_file_list()] - Updating File List <gcodes>...
